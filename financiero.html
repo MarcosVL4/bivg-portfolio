@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Performance Dashboard — BIVG</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .dash-row.r1 { grid-template-columns: 8fr 4fr; }
+    .dash-row.r2 { grid-template-columns: 7fr 5fr; }
+    .dash-row.r3 { grid-template-columns: 1fr; }
+
+    /* P&L table */
+    .pl-table { width: 100%; font-size: 0.82rem; }
+    .pl-table tr td { padding: 6px 8px; border-bottom: 1px solid #1a1a1d; }
+    .pl-table tr:last-child td { border-bottom: none; }
+    .pl-section-header td {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-top: 12px;
+      padding-bottom: 4px;
+    }
+    .pl-total td { border-top: 1px solid var(--border-subtle); font-weight: 600; }
+    .pl-indent { padding-left: 18px !important; }
+    .pl-val-pos { font-family: var(--font-mono); font-size: 0.72rem; color: var(--green); text-align:right; }
+    .pl-val-neg { font-family: var(--font-mono); font-size: 0.72rem; color: var(--red); text-align:right; }
+    .pl-val-neu { font-family: var(--font-mono); font-size: 0.72rem; color: var(--orange); text-align:right; font-weight:700; }
+    .pl-pct { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); text-align:right; }
+
+    /* Budget vs real bars */
+    .bvr-list { display: flex; flex-direction: column; gap: 14px; }
+    .bvr-item {}
+    .bvr-item__header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+    .bvr-item__label { font-size: 0.82rem; color: var(--text-secondary); }
+    .bvr-item__vals { display: flex; gap: 8px; font-family: var(--font-mono); font-size: 0.68rem; }
+    .bvr-track { height: 8px; background: var(--border-subtle); border-radius: 4px; position: relative; margin-bottom: 3px; }
+    .bvr-budget { height: 8px; border-radius: 4px; background: #52525B; position: absolute; top: 0; left: 0; }
+    .bvr-real   { height: 8px; border-radius: 4px; background: var(--orange); position: absolute; top: 0; left: 0; }
+    .bvr-delta  { font-family: var(--font-mono); font-size: 0.65rem; }
+  </style>
+</head>
+<body class="dash-page">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="topbar__brand">
+      <div class="topbar__logo">BI<span>VG</span></div>
+      <a href="index.html" class="topbar__back">← bivg.es</a>
+    </div>
+    <div class="topbar__center">
+      <div class="topbar__title">Financial Performance Dashboard</div>
+      <div class="topbar__subtitle">Datos de muestra &middot; 2024 &middot; Cierre provisional</div>
+    </div>
+    <div class="topbar__controls">
+      <button class="filter-pill active">YTD 2024</button>
+      <button class="filter-pill">2023</button>
+      <button class="filter-pill">Q4 2024</button>
+      <button class="filter-pill">Budget</button>
+      <span class="live-dot">live</span>
+    </div>
+  </div>
+</header>
+
+<main class="dash-body">
+
+  <!-- KPI ROW (5) -->
+  <div class="kpi-row kpi-row--5">
+    <div class="kpi-card" style="--kpi-color: var(--green);">
+      <div class="kpi-card__label">Ingresos YTD</div>
+      <div class="kpi-card__value">8.74M€</div>
+      <div class="kpi-card__delta up">↑ +11.2% vs 2023</div>
+      <canvas class="kpi-card__sparkline" id="spk1"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: #14B8A6;">
+      <div class="kpi-card__label">Margen bruto</div>
+      <div class="kpi-card__value">42.8%</div>
+      <div class="kpi-card__delta up">↑ +1.4pp</div>
+      <canvas class="kpi-card__sparkline" id="spk2"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--orange);">
+      <div class="kpi-card__label">EBITDA</div>
+      <div class="kpi-card__value">1.62M€</div>
+      <div class="kpi-card__delta up">↑ Margen 18.5%</div>
+      <canvas class="kpi-card__sparkline" id="spk3"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: #F59E0B;">
+      <div class="kpi-card__label">Cashflow libre</div>
+      <div class="kpi-card__value">1.08M€</div>
+      <div class="kpi-card__delta up">↑ +24.1%</div>
+      <canvas class="kpi-card__sparkline" id="spk4"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--red);">
+      <div class="kpi-card__label">Desv. presupuesto</div>
+      <div class="kpi-card__value">−3.1%</div>
+      <div class="kpi-card__delta up">↑ Dentro ±5%</div>
+      <canvas class="kpi-card__sparkline" id="spk5"></canvas>
+    </div>
+  </div>
+
+  <!-- ROW 1: Waterfall + P&L table -->
+  <div class="dash-row r1">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Waterfall P&amp;L 2024</div>
+          <div class="chart-card__sub">Ingresos → EBIT &middot; Miles €</div>
+        </div>
+        <span class="chart-badge">P&amp;L Bridge</span>
+      </div>
+      <canvas id="waterfallChart" height="130"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Cuenta de resultados</div>
+          <div class="chart-card__sub">Resumen ejecutivo 2024</div>
+        </div>
+      </div>
+      <table class="pl-table">
+        <tbody>
+          <tr class="pl-section-header"><td colspan="3">INGRESOS</td></tr>
+          <tr><td class="pl-indent">Ventas netas</td><td class="pl-val-pos">8.740K€</td><td class="pl-pct">100%</td></tr>
+          <tr><td class="pl-indent">Otros ingresos</td><td class="pl-val-pos">148K€</td><td class="pl-pct">1.7%</td></tr>
+          <tr class="pl-total"><td>Total ingresos</td><td class="pl-val-pos">8.888K€</td><td class="pl-pct">—</td></tr>
+
+          <tr class="pl-section-header"><td colspan="3">COSTES</td></tr>
+          <tr><td class="pl-indent">COGS</td><td class="pl-val-neg">−4.998K€</td><td class="pl-pct">57.2%</td></tr>
+          <tr class="pl-total"><td>Margen bruto</td><td class="pl-val-pos">3.742K€</td><td class="pl-pct">42.8%</td></tr>
+
+          <tr><td class="pl-indent">Gastos operativos</td><td class="pl-val-neg">−2.122K€</td><td class="pl-pct">24.3%</td></tr>
+          <tr class="pl-total"><td>EBITDA</td><td class="pl-val-neu">1.620K€</td><td class="pl-pct">18.5%</td></tr>
+
+          <tr><td class="pl-indent">D&amp;A</td><td class="pl-val-neg">−228K€</td><td class="pl-pct">2.6%</td></tr>
+          <tr class="pl-total"><td><strong>EBIT</strong></td><td class="pl-val-neu">1.392K€</td><td class="pl-pct">15.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROW 2: Barras ingresos + Budget vs Real -->
+  <div class="dash-row r2">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Ingresos mensuales 2024 vs 2023</div>
+          <div class="chart-card__sub">Barras + EBITDA % en eje secundario</div>
+        </div>
+        <span class="chart-badge">Dual axis</span>
+      </div>
+      <canvas id="revenueChart" height="120"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Budget vs Real por area</div>
+          <div class="chart-card__sub">Desviacion 2024</div>
+        </div>
+      </div>
+      <div class="bvr-list" id="bvrList"></div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Cashflow apilado -->
+  <div class="dash-row r3">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Cashflow mensual 2024</div>
+          <div class="chart-card__sub">Operativo / Inversion / Financiacion + FCF neto</div>
+        </div>
+        <span class="chart-badge">Stacked + FCF</span>
+      </div>
+      <canvas id="cashflowChart" height="80"></canvas>
+    </div>
+  </div>
+
+</main>
+
+<script>
+Chart.defaults.color = '#A1A1AA';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 11;
+const T = { backgroundColor:'#111113',borderColor:'#27272A',borderWidth:1,
+  titleColor:'#FAFAFA',bodyColor:'#A1A1AA',padding:10,cornerRadius:6 };
+
+function mkSpk(id,data,color){
+  new Chart(document.getElementById(id),{type:'line',
+  data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,borderWidth:2,pointRadius:0,tension:.4,fill:true,backgroundColor:color+'20'}]},
+  options:{responsive:true,animation:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}});
+}
+mkSpk('spk1',[680,695,710,718,728,736,748,755,762,770,784,795],'#10B981');
+mkSpk('spk2',[40.8,41,41.2,41.5,41.8,42,42.1,42.3,42.5,42.6,42.7,42.8],'#14B8A6');
+mkSpk('spk3',[118,120,125,128,132,136,138,140,142,144,146,152],'#F97316');
+mkSpk('spk4',[72,75,78,80,82,84,86,88,90,92,96,100],'#F59E0B');
+mkSpk('spk5',[-5.2,-4.8,-4.5,-4.1,-3.8,-3.6,-3.5,-3.3,-3.2,-3.1,-3.1,-3.1],'#EF4444');
+
+/* Waterfall */
+const wfLabels = ['Ingresos','COGS','Mg. Bruto','OpEx','EBITDA','D&A','EBIT'];
+const wfVals   = [8740, -4998, 3742, -2122, 1620, -228, 1392];
+const wfColors = wfVals.map(v => v > 0 ? (v === 8740 ? '#10B981CC' : '#10B98199') : '#EF444499');
+wfColors[4] = '#F97316CC';
+wfColors[6] = '#F97316CC';
+
+// floating bars: base + value
+const wfBase = [];
+let running = 0;
+wfVals.forEach((v, i) => {
+  if (i === 0 || i === 2 || i === 4 || i === 6) {
+    wfBase.push(0);
+    running = Math.abs(v);
+  } else {
+    if (v < 0) {
+      wfBase.push(running + v);
+    } else {
+      wfBase.push(running);
+    }
+    running += v;
+  }
+});
+
+new Chart(document.getElementById('waterfallChart'), {
+  type: 'bar',
+  data: {
+    labels: wfLabels,
+    datasets: [
+      { label: '_base', data: wfBase, backgroundColor: 'transparent', borderColor: 'transparent', stack: 'wf' },
+      { label: 'Valor', data: wfVals.map(v => Math.abs(v)), backgroundColor: wfColors,
+        borderColor: wfColors.map(c=>c.replace('99','FF').replace('CC','FF')),
+        borderWidth: 1, borderRadius: 3, stack: 'wf' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false }, tooltip: { ...T,
+      callbacks: { label: (c) => c.datasetIndex===0 ? null : ` ${wfLabels[c.dataIndex]}: ${wfVals[c.dataIndex].toLocaleString('es')}K€` }
+    }},
+    scales: {
+      x: { grid: { color: '#27272A' }, ticks: { color: '#A1A1AA' }, stacked: true },
+      y: { grid: { color: '#27272A' }, ticks: { color: '#A1A1AA', callback: v => v+'K€' }, stacked: true }
+    }
+  }
+});
+
+/* Revenue chart */
+const months=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+new Chart(document.getElementById('revenueChart'), {
+  type:'bar',
+  data:{labels:months,datasets:[
+    {label:'Ingresos 2024',data:[580,620,720,690,740,790,755,745,810,800,850,840],backgroundColor:'#F9731650',borderColor:'#F97316',borderWidth:1},
+    {label:'Ingresos 2023',data:[510,545,640,610,660,705,680,670,730,720,760,755],backgroundColor:'#27272A',borderColor:'#3B82F650',borderWidth:1},
+    {label:'EBITDA %',data:[16.2,16.8,18.4,17.9,18.1,19.2,18.8,18.5,19.4,19.1,19.6,19.8],
+     type:'line',yAxisID:'y2',borderColor:'#F97316',borderWidth:2.5,pointRadius:3,
+     pointBackgroundColor:'#F97316',tension:.4,fill:false}
+  ]},
+  options:{responsive:true,
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14}},tooltip:{...T,mode:'index',intersect:false}},
+    scales:{
+      x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'}},
+      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA',callback:v=>v+'K€'}},
+      y2:{position:'right',grid:{display:false},ticks:{color:'#F97316',callback:v=>v+'%'},title:{display:true,text:'EBITDA %',color:'#F97316'}}
+    }}
+});
+
+/* Budget vs Real */
+const bvr = [
+  {area:'Ventas',     budget:9000, real:8740},
+  {area:'Operaciones',budget:3800, real:3620},
+  {area:'Marketing',  budget:950,  real:1050},
+  {area:'RRHH',       budget:680,  real:665},
+  {area:'IT',         budget:420,  real:398},
+  {area:'Finanzas',   budget:280,  real:289},
+];
+const maxBvr = 9000;
+const bvrEl = document.getElementById('bvrList');
+bvr.forEach(b => {
+  const bPct = (b.budget/maxBvr*100).toFixed(0);
+  const rPct = (b.real/maxBvr*100).toFixed(0);
+  const delta = (((b.real-b.budget)/b.budget)*100).toFixed(1);
+  const dCls = delta > 0 ? 'delta-negative' : 'delta-positive';
+  const dStr = delta > 0 ? '+'+delta+'%' : delta+'%';
+  bvrEl.innerHTML += `<div class="bvr-item">
+    <div class="bvr-item__header">
+      <span class="bvr-item__label">${b.area}</span>
+      <div class="bvr-item__vals">
+        <span style="color:var(--text-muted)">${b.budget}K€</span>
+        <span style="color:var(--orange)">${b.real}K€</span>
+        <span class="${dCls}">${dStr}</span>
+      </div>
+    </div>
+    <div class="bvr-track" style="height:8px">
+      <div class="bvr-budget" style="width:${bPct}%"></div>
+      <div class="bvr-real"   style="width:${rPct}%"></div>
+    </div>
+  </div>`;
+});
+
+/* Cashflow stacked */
+new Chart(document.getElementById('cashflowChart'), {
+  type:'bar',
+  data:{labels:months,datasets:[
+    {label:'Operativo',  data:[145,152,168,158,172,185,178,175,190,184,196,198],backgroundColor:'#10B98160',stack:'cf'},
+    {label:'Inversion',  data:[-42,-38,-55,-48,-52,-60,-45,-50,-62,-58,-65,-70],backgroundColor:'#EF444450',stack:'cf'},
+    {label:'Financiacion',data:[-18,-22,-15,-20,-18,-25,-20,-22,-28,-24,-30,-32],backgroundColor:'#3B82F650',stack:'cf'},
+    {label:'FCF Neto',   data:[85,92,98,90,102,100,113,103,100,102,101,96],
+     type:'line',yAxisID:'y',borderColor:'#F97316',borderWidth:2.5,
+     pointRadius:3,pointBackgroundColor:'#F97316',tension:.4,fill:false,stack:undefined}
+  ]},
+  options:{responsive:true,
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14}},tooltip:{...T,mode:'index',intersect:false}},
+    scales:{
+      x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},stacked:true},
+      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA',callback:v=>v+'K€'},stacked:true}
+    }}
+});
+</script>
+</body>
+</html>

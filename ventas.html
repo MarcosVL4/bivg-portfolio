@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Performance Dashboard — BIVG</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .dash-row.r1 { grid-template-columns: 8fr 4fr; }
+    .dash-row.r2 { grid-template-columns: 5fr 7fr; }
+    .dash-row.r3 { grid-template-columns: 4fr 8fr; }
+    .dash-row.r4 { grid-template-columns: 1fr; }
+    .region-list { display: flex; flex-direction: column; gap: 10px; }
+    .region-item { display: flex; align-items: center; gap: 10px; }
+    .region-item__name { font-size: 0.82rem; color: var(--text-secondary); min-width: 110px; }
+    .region-item__bar { flex: 1; height: 6px; background: var(--border-subtle); border-radius: 3px; overflow: hidden; }
+    .region-item__fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--orange-mid)); border-radius: 3px; }
+    .region-item__val { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); min-width: 52px; text-align: right; }
+  </style>
+</head>
+<body class="dash-page">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="topbar__brand">
+      <div class="topbar__logo">BI<span>VG</span></div>
+      <a href="index.html" class="topbar__back">← bivg.es</a>
+    </div>
+    <div class="topbar__center">
+      <div class="topbar__title">Sales Performance Dashboard</div>
+      <div class="topbar__subtitle">Datos de muestra &middot; 2024 &middot; Actualizado ene 2025</div>
+    </div>
+    <div class="topbar__controls">
+      <button class="filter-pill active">2024</button>
+      <button class="filter-pill">2023</button>
+      <button class="filter-pill">Q4 2024</button>
+      <button class="filter-pill">YTD</button>
+      <span class="live-dot">live</span>
+    </div>
+  </div>
+</header>
+
+<main class="dash-body">
+
+  <!-- KPI ROW -->
+  <div class="kpi-row kpi-row--4">
+    <div class="kpi-card" style="--kpi-color: var(--orange);">
+      <div class="kpi-card__label">Ventas YTD</div>
+      <div class="kpi-card__value">2.41M€</div>
+      <div class="kpi-card__delta up">↑ +14.3% vs año anterior</div>
+      <canvas class="kpi-card__sparkline" id="spk1"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--green);">
+      <div class="kpi-card__label">Unidades vendidas</div>
+      <div class="kpi-card__value">38,240</div>
+      <div class="kpi-card__delta up">↑ +8.7% unidades</div>
+      <canvas class="kpi-card__sparkline" id="spk2"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: #F59E0B;">
+      <div class="kpi-card__label">Ticket medio</div>
+      <div class="kpi-card__value">63.1€</div>
+      <div class="kpi-card__delta up">↑ +5.1% por pedido</div>
+      <canvas class="kpi-card__sparkline" id="spk3"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--red);">
+      <div class="kpi-card__label">Tasa devoluciones</div>
+      <div class="kpi-card__value">3.2%</div>
+      <div class="kpi-card__delta up">↓ −0.8pp mejoria</div>
+      <canvas class="kpi-card__sparkline" id="spk4"></canvas>
+    </div>
+  </div>
+
+  <!-- ROW 1: Linea + Donut -->
+  <div class="dash-row r1">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Evolucion mensual de ventas</div>
+          <div class="chart-card__sub">2024 vs 2023 &middot; Importes en miles €</div>
+        </div>
+        <span class="chart-badge">Tendencia</span>
+      </div>
+      <canvas id="lineChart" height="90"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Canal de venta</div>
+          <div class="chart-card__sub">Distribucion de ingresos 2024</div>
+        </div>
+      </div>
+      <canvas id="donutChart" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- ROW 2: Tabla productos + Barras agrupadas -->
+  <div class="dash-row r2">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Top 8 productos</div>
+          <div class="chart-card__sub">Ventas acumuladas 2024</div>
+        </div>
+      </div>
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Producto</th>
+            <th>Prog.</th>
+            <th>Ventas</th>
+            <th>Δ%</th>
+          </tr>
+        </thead>
+        <tbody id="topProductsTable"></tbody>
+      </table>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Ventas por categoria y trimestre</div>
+          <div class="chart-card__sub">Q1 – Q4 2024 &middot; Miles €</div>
+        </div>
+      </div>
+      <canvas id="barGrouped" height="110"></canvas>
+    </div>
+  </div>
+
+  <!-- ROW 3: Regiones + Bubble -->
+  <div class="dash-row r3">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Ventas por region</div>
+          <div class="chart-card__sub">Acumulado 2024</div>
+        </div>
+      </div>
+      <div class="region-list" id="regionList"></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Precio unitario vs Volumen</div>
+          <div class="chart-card__sub">Tamaño = margen bruto &middot; por categoria</div>
+        </div>
+        <span class="chart-badge">Bubble</span>
+      </div>
+      <canvas id="bubbleChart" height="200"></canvas>
+    </div>
+  </div>
+
+</main>
+
+<script>
+/* ── Chart defaults ───────────────────────────────────────── */
+Chart.defaults.color = '#A1A1AA';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 11;
+
+const tooltipDefaults = {
+  backgroundColor: '#111113',
+  borderColor: '#27272A',
+  borderWidth: 1,
+  titleColor: '#FAFAFA',
+  bodyColor: '#A1A1AA',
+  padding: 10,
+  cornerRadius: 6,
+};
+
+/* ── Sparklines ───────────────────────────────────────────── */
+function mkSparkline(id, data, color) {
+  new Chart(document.getElementById(id), {
+    type: 'line',
+    data: {
+      labels: data.map((_,i) => i),
+      datasets: [{ data, borderColor: color, borderWidth: 2, pointRadius: 0, tension: 0.4,
+        fill: true, backgroundColor: color + '20' }]
+    },
+    options: {
+      responsive: true, animation: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      scales: { x: { display: false }, y: { display: false } }
+    }
+  });
+}
+mkSparkline('spk1', [155,162,170,178,185,192,198,202,210,215,220,241], '#F97316');
+mkSparkline('spk2', [2800,2950,3100,3200,3150,3300,3400,3350,3500,3600,3550,3650], '#10B981');
+mkSparkline('spk3', [58,59,60,60.5,61,61.5,62,62.3,62.8,63,63.1,63.1], '#F59E0B');
+mkSparkline('spk4', [4.2,4.0,3.9,3.8,3.7,3.6,3.5,3.4,3.4,3.3,3.2,3.2], '#EF4444');
+
+/* ── Line chart (mensual) ─────────────────────────────────── */
+const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+new Chart(document.getElementById('lineChart'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      {
+        label: '2024',
+        data: [155,162,185,178,195,210,202,198,220,215,232,241],
+        borderColor: '#F97316', borderWidth: 2.5, pointRadius: 4,
+        pointBackgroundColor: '#F97316', tension: 0.4,
+        fill: true,
+        backgroundColor: (ctx) => {
+          const g = ctx.chart.ctx.createLinearGradient(0,0,0,ctx.chart.height);
+          g.addColorStop(0,'#F9731630'); g.addColorStop(1,'#F9731602');
+          return g;
+        }
+      },
+      {
+        label: '2023',
+        data: [132,140,158,150,168,180,175,172,190,188,200,211],
+        borderColor: '#3B82F6', borderWidth: 2, borderDash: [5,4],
+        pointRadius: 3, pointBackgroundColor: '#3B82F6', tension: 0.4,
+        fill: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } },
+      tooltip: { ...tooltipDefaults, mode: 'index', intersect: false } },
+    scales: {
+      x: { grid: { color: '#27272A' }, ticks: { color: '#A1A1AA' } },
+      y: { grid: { color: '#27272A' }, ticks: { color: '#A1A1AA', callback: v => v + 'K€' } }
+    }
+  }
+});
+
+/* ── Donut chart ─────────────────────────────────────────── */
+new Chart(document.getElementById('donutChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Tienda física','E-commerce','Distribuidores','Mayoristas'],
+    datasets: [{ data: [38,31,19,12],
+      backgroundColor: ['#F97316','#FB923C','#3B82F6','#10B981'],
+      borderColor: '#111113', borderWidth: 3, hoverOffset: 6 }]
+  },
+  options: {
+    responsive: true, cutout: '68%',
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 14, color: '#A1A1AA' } },
+      tooltip: { ...tooltipDefaults, callbacks: { label: c => ` ${c.label}: ${c.parsed}%` } }
+    }
+  }
+});
+
+/* ── Top products table ──────────────────────────────────── */
+const products = [
+  { name: 'Smart TV 55"', sales: 285400, pct: 100, delta: '+18.2' },
+  { name: 'Lavadora 9kg',  sales: 241300, pct: 85,  delta: '+12.1' },
+  { name: 'Aire Acond.',   sales: 198700, pct: 70,  delta: '+9.4'  },
+  { name: 'Frigorífico',   sales: 176200, pct: 62,  delta: '+6.8'  },
+  { name: 'Robot cocina',  sales: 154800, pct: 54,  delta: '+21.3' },
+  { name: 'Portátil 15"',  sales: 132100, pct: 46,  delta: '-3.2'  },
+  { name: 'Auriculares BT',sales: 118400, pct: 42,  delta: '+31.5' },
+  { name: 'Aspiradora',    sales: 97600,  pct: 34,  delta: '+4.1'  },
+];
+const tbody = document.getElementById('topProductsTable');
+products.forEach((p, i) => {
+  const pos = p.delta.startsWith('+');
+  tbody.innerHTML += `<tr>
+    <td class="rank-num">${i+1}</td>
+    <td style="color:var(--text-primary);font-size:.82rem;">${p.name}</td>
+    <td><div class="progress-bar"><div class="progress-bar__fill" style="width:${p.pct}%"></div></div></td>
+    <td style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-secondary);">${(p.sales/1000).toFixed(0)}K€</td>
+    <td class="${pos?'delta-positive':'delta-negative'}">${p.delta}%</td>
+  </tr>`;
+});
+
+/* ── Grouped bars (categoria x trimestre) ─────────────────── */
+new Chart(document.getElementById('barGrouped'), {
+  type: 'bar',
+  data: {
+    labels: ['Electrónica','Hogar','Deportes','Moda','Alimentación'],
+    datasets: [
+      { label: 'Q1', data: [82,65,48,55,38], backgroundColor: '#F97316CC' },
+      { label: 'Q2', data: [95,72,62,60,42], backgroundColor: '#FB923CCC' },
+      { label: 'Q3', data: [88,68,75,58,44], backgroundColor: '#FDBA74CC' },
+      { label: 'Q4', data: [112,85,52,72,50], backgroundColor: '#FED7AACC' },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 14 } },
+      tooltip: { ...tooltipDefaults, mode: 'index' } },
+    scales: {
+      x: { grid: { color: '#27272A' }, ticks: { color: '#A1A1AA' } },
+      y: { grid: { color: '#27272A' }, ticks: { color: '#A1A1AA', callback: v => v + 'K€' } }
+    }
+  }
+});
+
+/* ── Regions ─────────────────────────────────────────────── */
+const regions = [
+  { name: 'Cataluña',        val: '524K€', pct: 100 },
+  { name: 'Madrid',          val: '498K€', pct: 95  },
+  { name: 'Andalucía',       val: '312K€', pct: 60  },
+  { name: 'C. Valenciana',   val: '245K€', pct: 47  },
+  { name: 'País Vasco',      val: '198K€', pct: 38  },
+  { name: 'Castilla y León', val: '145K€', pct: 28  },
+  { name: 'Canarias',        val: '118K€', pct: 23  },
+  { name: 'Resto',           val: '370K€', pct: 71  },
+];
+const rl = document.getElementById('regionList');
+regions.forEach(r => {
+  rl.innerHTML += `<div class="region-item">
+    <span class="region-item__name">${r.name}</span>
+    <div class="region-item__bar"><div class="region-item__fill" style="width:${r.pct}%"></div></div>
+    <span class="region-item__val">${r.val}</span>
+  </div>`;
+});
+
+/* ── Bubble chart ────────────────────────────────────────── */
+new Chart(document.getElementById('bubbleChart'), {
+  type: 'bubble',
+  data: {
+    datasets: [
+      { label:'Electrónica', data:[{x:245,y:1850,r:22}], backgroundColor:'#F9731680', borderColor:'#F97316' },
+      { label:'Hogar',       data:[{x:158,y:2200,r:18}], backgroundColor:'#FB923C80', borderColor:'#FB923C' },
+      { label:'Deportes',    data:[{x:89,y:3100,r:12}],  backgroundColor:'#10B98180', borderColor:'#10B981' },
+      { label:'Moda',        data:[{x:65,y:1650,r:9}],   backgroundColor:'#3B82F680', borderColor:'#3B82F6' },
+      { label:'Alimentación',data:[{x:32,y:4200,r:7}],   backgroundColor:'#FDBA7480', borderColor:'#FDBA74' },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12 } },
+      tooltip: { ...tooltipDefaults, callbacks: {
+        label: c => ` ${c.dataset.label} — Precio: ${c.parsed.x}€, Vol: ${c.parsed.y}`
+      }}
+    },
+    scales: {
+      x: { grid: { color: '#27272A' }, title: { display: true, text: 'Precio unitario (€)', color: '#52525B' },
+           ticks: { color: '#A1A1AA' } },
+      y: { grid: { color: '#27272A' }, title: { display: true, text: 'Volumen (uds)', color: '#52525B' },
+           ticks: { color: '#A1A1AA' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operations Control Tower — BIVG</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .dash-row.r1 { grid-template-columns: 4fr 8fr; }
+    .dash-row.r2 { grid-template-columns: 5fr 7fr; }
+    .dash-row.r3 { grid-template-columns: 4fr 8fr; }
+
+    /* OEE gauge card */
+    .oee-gauge-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .oee-gauge-svg { width: 100%; max-width: 260px; }
+    .oee-sub-metrics { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .oee-sub-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px;
+      background: #18181B; border-radius: 6px; border: 1px solid var(--border-subtle); }
+    .oee-sub-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.07em; color: var(--text-muted); }
+    .oee-sub-val { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; }
+
+    /* Heatmap */
+    .heatmap-wrap { overflow-x: auto; }
+    .heatmap-grid { display: grid; gap: 3px; }
+    .heatmap-cell { width: 100%; aspect-ratio: 1.6; border-radius: 3px; display: flex; align-items: center;
+      justify-content: center; font-family: var(--font-mono); font-size: 0.58rem; color: rgba(0,0,0,0.7);
+      font-weight: 600; cursor: default; transition: transform .15s; }
+    .heatmap-cell:hover { transform: scale(1.15); z-index: 2; }
+    .heatmap-day-labels { display: grid; gap: 3px; margin-bottom: 3px; }
+    .heatmap-day-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted);
+      text-align: center; }
+    .heatmap-row-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-muted); display: flex; align-items: center; }
+  </style>
+</head>
+<body class="dash-page">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="topbar__brand">
+      <div class="topbar__logo">BI<span>VG</span></div>
+      <a href="index.html" class="topbar__back">← bivg.es</a>
+    </div>
+    <div class="topbar__center">
+      <div class="topbar__title">Operations Control Tower</div>
+      <div class="topbar__subtitle">Datos de muestra &middot; 2024 &middot; Turno actual</div>
+    </div>
+    <div class="topbar__controls">
+      <button class="filter-pill active">Hoy</button>
+      <button class="filter-pill">Esta semana</button>
+      <button class="filter-pill">Mes</button>
+      <button class="filter-pill">Todas las lineas</button>
+      <span class="live-dot">live</span>
+    </div>
+  </div>
+</header>
+
+<main class="dash-body">
+
+  <!-- KPI ROW (5) -->
+  <div class="kpi-row kpi-row--5">
+    <div class="kpi-card" style="--kpi-color: var(--orange);">
+      <div class="kpi-card__label">OEE Global</div>
+      <div class="kpi-card__value">87.3%</div>
+      <div class="kpi-card__delta up">↑ +2.1pp vs semana</div>
+      <canvas class="kpi-card__sparkline" id="spk1"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--green);">
+      <div class="kpi-card__label">On-time delivery</div>
+      <div class="kpi-card__value">96.1%</div>
+      <div class="kpi-card__delta up">↑ +1.3pp</div>
+      <canvas class="kpi-card__sparkline" id="spk2"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--blue);">
+      <div class="kpi-card__label">Pedidos hoy</div>
+      <div class="kpi-card__value">1,247</div>
+      <div class="kpi-card__delta up">↑ +8.2% vs ayer</div>
+      <canvas class="kpi-card__sparkline" id="spk3"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--red);">
+      <div class="kpi-card__label">Tasa defectos</div>
+      <div class="kpi-card__value">1.8%</div>
+      <div class="kpi-card__delta up">↓ −0.4pp mejoria</div>
+      <canvas class="kpi-card__sparkline" id="spk4"></canvas>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--green);">
+      <div class="kpi-card__label">Lead time medio</div>
+      <div class="kpi-card__value">2.3d</div>
+      <div class="kpi-card__delta up">↓ −0.2d mejoria</div>
+      <canvas class="kpi-card__sparkline" id="spk5"></canvas>
+    </div>
+  </div>
+
+  <!-- ROW 1: OEE gauge + Produccion diaria -->
+  <div class="dash-row r1">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">OEE Global</div>
+          <div class="chart-card__sub">Disponibilidad &times; Rendimiento &times; Calidad</div>
+        </div>
+        <span class="chart-badge">87.3%</span>
+      </div>
+      <div class="oee-gauge-wrap">
+        <svg class="oee-gauge-svg" viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oeeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#FB923C"/>
+              <stop offset="100%" stop-color="#F97316"/>
+            </linearGradient>
+          </defs>
+          <!-- Track -->
+          <path d="M 20 130 A 110 110 0 0 1 240 130" fill="none" stroke="#27272A" stroke-width="22" stroke-linecap="round"/>
+          <!-- Fill 87.3% of 180deg = 157.14deg -->
+          <!-- circumference of arc = PI * r = 3.14159 * 110 = 345.6 ; 87.3% = 301.7 -->
+          <path d="M 20 130 A 110 110 0 0 1 240 130" fill="none" stroke="url(#oeeGrad)" stroke-width="22"
+                stroke-linecap="round" stroke-dasharray="302 346"/>
+          <!-- Needle indicator -->
+          <circle cx="130" cy="130" r="6" fill="#F97316"/>
+          <!-- Text -->
+          <text x="130" y="108" text-anchor="middle" font-family="Syne, sans-serif" font-size="32" font-weight="800" fill="#FAFAFA">87.3%</text>
+          <text x="130" y="126" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA" letter-spacing="2">OEE GLOBAL</text>
+          <!-- Min/Max labels -->
+          <text x="14"  y="148" font-family="JetBrains Mono, monospace" font-size="8" fill="#52525B">0%</text>
+          <text x="235" y="148" font-family="JetBrains Mono, monospace" font-size="8" fill="#52525B">100%</text>
+        </svg>
+        <div class="oee-sub-metrics">
+          <div class="oee-sub-item">
+            <span class="oee-sub-label">Disponibilidad</span>
+            <span class="oee-sub-val" style="color:#3B82F6">91.2%</span>
+          </div>
+          <div class="oee-sub-item">
+            <span class="oee-sub-label">Rendimiento</span>
+            <span class="oee-sub-val" style="color:#F97316">93.8%</span>
+          </div>
+          <div class="oee-sub-item">
+            <span class="oee-sub-label">Calidad</span>
+            <span class="oee-sub-val" style="color:#10B981">98.2%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Produccion diaria — Ultimo mes</div>
+          <div class="chart-card__sub">Real vs Objetivo &middot; Unidades producidas</div>
+        </div>
+        <span class="chart-badge">20 dias lab.</span>
+      </div>
+      <canvas id="prodChart" height="120"></canvas>
+    </div>
+  </div>
+
+  <!-- ROW 2: Tabla lineas + Pedidos mensual -->
+  <div class="dash-row r2">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Estado de lineas de produccion</div>
+          <div class="chart-card__sub">Turno actual</div>
+        </div>
+      </div>
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Linea</th>
+            <th>OEE %</th>
+            <th>Uds/h</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="linesTable"></tbody>
+      </table>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Pedidos 2024 — Mensual</div>
+          <div class="chart-card__sub">Recibidos / Procesados / Entregados</div>
+        </div>
+      </div>
+      <canvas id="ordersChart" height="120"></canvas>
+    </div>
+  </div>
+
+  <!-- ROW 3: Heatmap lead time + Pareto defectos -->
+  <div class="dash-row r3">
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Heatmap Lead Time</div>
+          <div class="chart-card__sub">5 dias x 8 semanas &middot; Dias habiles &middot; Verde = rapido, Rojo = lento</div>
+        </div>
+      </div>
+      <div id="heatmapContainer"></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card__header">
+        <div>
+          <div class="chart-card__title">Pareto de defectos</div>
+          <div class="chart-card__sub">Causas principales &middot; % acumulado</div>
+        </div>
+        <span class="chart-badge">Pareto 80/20</span>
+      </div>
+      <canvas id="paretoChart" height="130"></canvas>
+    </div>
+  </div>
+
+</main>
+
+<script>
+Chart.defaults.color = '#A1A1AA';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 11;
+const T = { backgroundColor:'#111113',borderColor:'#27272A',borderWidth:1,
+  titleColor:'#FAFAFA',bodyColor:'#A1A1AA',padding:10,cornerRadius:6 };
+
+function mkSpk(id,data,color){
+  new Chart(document.getElementById(id),{type:'line',
+  data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:color,borderWidth:2,pointRadius:0,tension:.4,fill:true,backgroundColor:color+'20'}]},
+  options:{responsive:true,animation:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}}}});
+}
+mkSpk('spk1',[82,83,84,84.5,85,85.5,86,86.2,86.5,86.8,87.1,87.3],'#F97316');
+mkSpk('spk2',[93.5,94,94.2,94.5,94.8,95,95.2,95.4,95.6,95.8,96,96.1],'#10B981');
+mkSpk('spk3',[980,1020,1100,1050,1150,1180,1120,1200,1150,1220,1200,1247],'#3B82F6');
+mkSpk('spk4',[2.8,2.7,2.6,2.6,2.5,2.4,2.3,2.3,2.2,2.1,1.9,1.8],'#EF4444');
+mkSpk('spk5',[3.0,2.9,2.8,2.7,2.7,2.6,2.6,2.5,2.5,2.4,2.3,2.3],'#10B981');
+
+/* Produccion diaria */
+const dias = Array.from({length:20},(_,i)=>`D${i+1}`);
+const objetivo = Array(20).fill(1200);
+const real = [1180,1210,1190,1230,1150,1260,1240,1220,1280,1195,1270,1250,1300,1185,1260,1240,1290,1310,1275,1247];
+new Chart(document.getElementById('prodChart'), {
+  type:'bar',
+  data:{labels:dias,datasets:[
+    {label:'Real',data:real,backgroundColor:real.map(v=>v>=1200?'#F9731670':'#EF444450'),
+     borderColor:real.map(v=>v>=1200?'#F97316':'#EF4444'),borderWidth:1,borderRadius:3},
+    {label:'Objetivo',data:objetivo,type:'line',borderColor:'#F9731690',borderWidth:1.5,borderDash:[5,4],
+     pointRadius:0,fill:false}
+  ]},
+  options:{responsive:true,
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14}},tooltip:{...T,mode:'index',intersect:false}},
+    scales:{x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA',font:{size:9}}},
+    y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},min:1050}}}
+});
+
+/* Tabla lineas */
+const lineas = [
+  {name:'Linea A1', oee:91.2, udsh:145, estado:'Operativa'},
+  {name:'Linea A2', oee:88.4, udsh:138, estado:'Operativa'},
+  {name:'Linea B1', oee:85.1, udsh:128, estado:'Operativa'},
+  {name:'Linea B2', oee:72.3, udsh:109, estado:'Atencion'},
+  {name:'Linea C1', oee:94.8, udsh:162, estado:'Operativa'},
+  {name:'Linea C2', oee:0,    udsh:0,   estado:'Parada'},
+  {name:'Linea D1', oee:89.6, udsh:142, estado:'Operativa'},
+  {name:'Linea D2', oee:68.2, udsh:102, estado:'Atencion'},
+];
+const lt = document.getElementById('linesTable');
+lineas.forEach(l => {
+  const estadoCls = l.estado==='Operativa'?'green':l.estado==='Atencion'?'amber':'red';
+  lt.innerHTML += `<tr>
+    <td style="font-weight:500;color:var(--text-primary);font-size:.82rem;">${l.name}</td>
+    <td><span style="font-family:var(--font-mono);font-size:.75rem;color:${l.oee>85?'#10B981':l.oee>70?'#F59E0B':'#EF4444'}">${l.oee>0?l.oee+'%':'—'}</span></td>
+    <td style="font-family:var(--font-mono);font-size:.72rem;">${l.udsh>0?l.udsh:' —'}</td>
+    <td><span class="status-badge ${estadoCls}">${l.estado}</span></td>
+  </tr>`;
+});
+
+/* Pedidos mensual */
+const months=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+new Chart(document.getElementById('ordersChart'), {
+  type:'line',
+  data:{labels:months,datasets:[
+    {label:'Recibidos', data:[980,1020,1150,1080,1200,1280,1220,1190,1310,1280,1350,1320],
+     borderColor:'#3B82F6',borderWidth:2,pointRadius:3,tension:.4,fill:false,pointBackgroundColor:'#3B82F6'},
+    {label:'Procesados',data:[965,1005,1130,1060,1180,1260,1200,1170,1290,1265,1330,1300],
+     borderColor:'#F97316',borderWidth:2,pointRadius:3,tension:.4,fill:false,pointBackgroundColor:'#F97316'},
+    {label:'Entregados', data:[952,995,1118,1048,1165,1248,1188,1155,1278,1250,1315,1285],
+     borderColor:'#10B981',borderWidth:2,pointRadius:3,tension:.4,fill:false,pointBackgroundColor:'#10B981'},
+  ]},
+  options:{responsive:true,
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14}},tooltip:{...T,mode:'index',intersect:false}},
+    scales:{x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'}},y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'}}}}
+});
+
+/* Heatmap lead time */
+(function buildHeatmap() {
+  const days = ['Lun','Mar','Mie','Jue','Vie'];
+  const weeks = 8;
+  const data = [];
+  for (let w = 0; w < weeks; w++) {
+    for (let d = 0; d < 5; d++) {
+      const base = 1.5 + Math.random() * 2.5;
+      data.push(+base.toFixed(1));
+    }
+  }
+
+  function ltColor(v) {
+    // 1.5 green → 2.5 orange → 4.0 red
+    const t = Math.min(1, Math.max(0, (v - 1.5) / 2.5));
+    if (t < 0.5) {
+      const r = Math.round(16 + (249-16) * (t*2));
+      const g = Math.round(185 + (115-185) * (t*2));
+      const b = Math.round(129 + (22-129) * (t*2));
+      return `rgb(${r},${g},${b})`;
+    } else {
+      const r = Math.round(249 + (239-249) * ((t-0.5)*2));
+      const g = Math.round(115 + (68-115) * ((t-0.5)*2));
+      const b = Math.round(22 + (68-22) * ((t-0.5)*2));
+      return `rgb(${r},${g},${b})`;
+    }
+  }
+
+  const container = document.getElementById('heatmapContainer');
+  let html = `<div style="display:grid;grid-template-columns:36px repeat(${days.length},1fr);gap:3px;margin-top:8px;">`;
+  html += `<div></div>`;
+  days.forEach(d => { html += `<div class="heatmap-day-label">${d}</div>`; });
+  for (let w = 0; w < weeks; w++) {
+    html += `<div class="heatmap-row-label">S${w+1}</div>`;
+    for (let d = 0; d < 5; d++) {
+      const v = data[w*5+d];
+      const col = ltColor(v);
+      html += `<div class="heatmap-cell" style="background:${col};aspect-ratio:1.8;" title="Semana ${w+1}, ${days[d]}: ${v}d">${v}d</div>`;
+    }
+  }
+  html += '</div>';
+  container.innerHTML = html;
+})();
+
+/* Pareto */
+const defectos = [
+  {cause:'Ajuste maquina', n:182},
+  {cause:'Material defect.', n:128},
+  {cause:'Operador',        n:94},
+  {cause:'Herramienta',     n:72},
+  {cause:'Diseño',          n:48},
+  {cause:'Entorno',         n:35},
+  {cause:'Otros',           n:28},
+];
+const total = defectos.reduce((s,d)=>s+d.n,0);
+let cum = 0;
+const cumPcts = defectos.map(d => { cum += d.n; return +(cum/total*100).toFixed(1); });
+new Chart(document.getElementById('paretoChart'), {
+  type:'bar',
+  data:{
+    labels: defectos.map(d=>d.cause),
+    datasets:[
+      {label:'Defectos', data:defectos.map(d=>d.n),backgroundColor:'#F9731380',borderColor:'#F97316',borderWidth:1,borderRadius:3},
+      {label:'% Acum.', data:cumPcts,type:'line',yAxisID:'y2',borderColor:'#EF4444',borderWidth:2.5,
+       pointRadius:4,pointBackgroundColor:'#EF4444',tension:.3,fill:false}
+    ]
+  },
+  options:{responsive:true,
+    plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14}},tooltip:{...T,mode:'index',intersect:false}},
+    scales:{
+      x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'}},
+      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},title:{display:true,text:'Num. defectos',color:'#52525B'}},
+      y2:{position:'right',grid:{display:false},ticks:{color:'#EF4444',callback:v=>v+'%'},
+          title:{display:true,text:'% acumulado',color:'#EF4444'},min:0,max:100}
+    }}
+});
+</script>
+</body>
+</html>
