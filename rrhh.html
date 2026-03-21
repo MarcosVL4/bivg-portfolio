@@ -337,5 +337,13 @@ goals.forEach(g => {
   </div>`;
 });
 </script>
+<script>
+document.querySelectorAll('.filter-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
