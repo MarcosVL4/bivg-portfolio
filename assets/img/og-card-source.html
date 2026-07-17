@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>OG Card — fuente para generar og-card.jpg (1200×630)</title>
+  <!-- Este archivo es la fuente de assets/img/og-card.jpg. Para regenerar la
+       imagen: abrir en Chrome y capturar la región 1200×630 desde (0,0). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; }
+    .card {
+      width: 1200px;
+      height: 630px;
+      background: #09090B;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 90px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(#27272A 1px, transparent 1px),
+        linear-gradient(90deg, #27272A 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      -webkit-mask-image: radial-gradient(ellipse 90% 90% at 40% 50%, black 10%, transparent 75%);
+      mask-image: radial-gradient(ellipse 90% 90% at 40% 50%, black 10%, transparent 75%);
+    }
+    .glow {
+      position: absolute;
+      top: -260px; right: -220px;
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249,115,22,0.20) 0%, transparent 70%);
+    }
+    .content { position: relative; z-index: 1; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      letter-spacing: 0.08em;
+      color: #FDBA74;
+      background: rgba(249,115,22,0.08);
+      border: 1px solid rgba(249,115,22,0.25);
+      padding: 9px 20px;
+      border-radius: 100px;
+      margin-bottom: 36px;
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #F97316; }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 110px;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #FAFAFA;
+      margin-bottom: 18px;
+    }
+    .logo span { color: #F97316; }
+    .tagline {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 34px;
+      letter-spacing: -0.02em;
+      color: #FAFAFA;
+      margin-bottom: 14px;
+    }
+    .tagline .accent {
+      background: linear-gradient(135deg, #F97316, #FB923C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sub {
+      font-size: 22px;
+      color: #A1A1AA;
+      margin-bottom: 44px;
+    }
+    .chips { display: flex; gap: 12px; }
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      padding: 8px 18px;
+      background: rgba(249,115,22,0.08);
+      border: 1px solid rgba(249,115,22,0.25);
+      color: #FDBA74;
+      border-radius: 6px;
+    }
+    .url {
+      position: absolute;
+      right: 90px; bottom: 48px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 19px;
+      letter-spacing: 0.06em;
+      color: #52525B;
+    }
+    .url b { color: #F97316; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="grid-bg"></div>
+    <div class="glow"></div>
+    <div class="content">
+      <div class="badge"><span class="dot"></span>MICROSOFT CERTIFIED &middot; PL-300</div>
+      <div class="logo">BI<span>VG</span></div>
+      <div class="tagline">Datos que cuentan <span class="accent">historias.</span> Decisiones que generan valor.</div>
+      <div class="sub">Business Intelligence &amp; Data Analytics &mdash; Portfolio de Marcos</div>
+      <div class="chips">
+        <span class="chip">Power BI</span>
+        <span class="chip">DAX</span>
+        <span class="chip">SQL Server</span>
+        <span class="chip">ETL</span>
+        <span class="chip">Fabric</span>
+      </div>
+    </div>
+    <div class="url"><b>bivg</b>.es</div>
+  </div>
+</body>
+</html>

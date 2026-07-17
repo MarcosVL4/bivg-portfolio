@@ -404,6 +404,11 @@ body::before {
   color: var(--orange);
   border-radius: var(--radius-sm);
   white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition);
+}
+a.cert-badge:hover {
+  background: var(--orange-glow2);
+  border-color: var(--orange);
 }
 
 /* ── ABOUT (SOBRE MÍ) ────────────────────────────────────────── */

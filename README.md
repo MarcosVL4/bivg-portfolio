@@ -33,6 +33,9 @@ bivg-portfolio/
 ├── assets/
 │   ├── css/
 │   │   └── main.css     # Todos los estilos compartidos
+│   ├── img/
+│   │   ├── og-card.png           # Imagen social (og:image) 1200x630
+│   │   └── og-card-source.html   # Fuente HTML para regenerar la imagen
 │   └── js/
 │       └── main.js      # Scroll reveal + navbar + menú + filter pills
 └── README.md
