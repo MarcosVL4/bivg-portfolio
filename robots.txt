@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bivg.es/sitemap.xml

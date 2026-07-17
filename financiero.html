@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Financial Performance Dashboard — BIVG</title>
+  <meta name="description" content="Financial Performance Dashboard — demo interactiva de P&L y cashflow con Chart.js. Portfolio BIVG." />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     .dash-row.r1 { grid-template-columns: 8fr 4fr; }
     .dash-row.r2 { grid-template-columns: 7fr 5fr; }
@@ -157,8 +162,8 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Budget vs Real por area</div>
-          <div class="chart-card__sub">Desviacion 2024</div>
+          <div class="chart-card__title">Budget vs Real por área</div>
+          <div class="chart-card__sub">Desviación 2024</div>
         </div>
       </div>
       <div class="bvr-list" id="bvrList"></div>
@@ -171,7 +176,7 @@
       <div class="chart-card__header">
         <div>
           <div class="chart-card__title">Cashflow mensual 2024</div>
-          <div class="chart-card__sub">Operativo / Inversion / Financiacion + FCF neto</div>
+          <div class="chart-card__sub">Operativo / Inversión / Financiación + FCF neto</div>
         </div>
         <span class="chart-badge">Stacked + FCF</span>
       </div>
@@ -181,6 +186,7 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 Chart.defaults.color = '#A1A1AA';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
@@ -304,8 +310,8 @@ new Chart(document.getElementById('cashflowChart'), {
   type:'bar',
   data:{labels:months,datasets:[
     {label:'Operativo',  data:[145,152,168,158,172,185,178,175,190,184,196,198],backgroundColor:'#10B98160',stack:'cf'},
-    {label:'Inversion',  data:[-42,-38,-55,-48,-52,-60,-45,-50,-62,-58,-65,-70],backgroundColor:'#EF444450',stack:'cf'},
-    {label:'Financiacion',data:[-18,-22,-15,-20,-18,-25,-20,-22,-28,-24,-30,-32],backgroundColor:'#3B82F650',stack:'cf'},
+    {label:'Inversión',  data:[-42,-38,-55,-48,-52,-60,-45,-50,-62,-58,-65,-70],backgroundColor:'#EF444450',stack:'cf'},
+    {label:'Financiación',data:[-18,-22,-15,-20,-18,-25,-20,-22,-28,-24,-30,-32],backgroundColor:'#3B82F650',stack:'cf'},
     {label:'FCF Neto',   data:[85,92,98,90,102,100,113,103,100,102,101,96],
      type:'line',yAxisID:'y',borderColor:'#F97316',borderWidth:2.5,
      pointRadius:3,pointBackgroundColor:'#F97316',tension:.4,fill:false,stack:undefined}
@@ -318,13 +324,6 @@ new Chart(document.getElementById('cashflowChart'), {
     }}
 });
 </script>
-<script>
-document.querySelectorAll('.filter-pill').forEach(pill => {
-  pill.addEventListener('click', () => {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-  });
-});
-</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

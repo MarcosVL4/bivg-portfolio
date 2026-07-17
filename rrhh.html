@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HR Analytics Dashboard — BIVG</title>
+  <meta name="description" content="HR Analytics Dashboard — demo interactiva de indicadores de RRHH con Chart.js. Portfolio BIVG." />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     .dash-row.r1 { grid-template-columns: 8fr 4fr; }
     .dash-row.r2 { grid-template-columns: 5fr 3fr 4fr; }
@@ -55,15 +60,15 @@
       <canvas class="kpi-card__sparkline" id="spk1"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--green);">
-      <div class="kpi-card__label">Satisfaccion media</div>
+      <div class="kpi-card__label">Satisfacción media</div>
       <div class="kpi-card__value">7.8<small style="font-size:1rem">/10</small></div>
       <div class="kpi-card__delta up">↑ +0.4 vs 2023</div>
       <canvas class="kpi-card__sparkline" id="spk2"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--red);">
-      <div class="kpi-card__label">Rotacion anual</div>
+      <div class="kpi-card__label">Rotación anual</div>
       <div class="kpi-card__value">8.3%</div>
-      <div class="kpi-card__delta up">↓ −1.2pp mejoria</div>
+      <div class="kpi-card__delta up">↓ −1.2pp mejoría</div>
       <canvas class="kpi-card__sparkline" id="spk3"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: #F59E0B;">
@@ -80,7 +85,7 @@
       <div class="chart-card__header">
         <div>
           <div class="chart-card__title">Movimientos de plantilla 2024</div>
-          <div class="chart-card__sub">Altas y bajas mensuales &middot; Acumulado como linea</div>
+          <div class="chart-card__sub">Altas y bajas mensuales &middot; Acumulado como línea</div>
         </div>
         <span class="chart-badge">Dual axis</span>
       </div>
@@ -89,7 +94,7 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Distribucion departamental</div>
+          <div class="chart-card__title">Distribución departamental</div>
           <div class="chart-card__sub">Headcount actual</div>
         </div>
       </div>
@@ -97,13 +102,13 @@
     </div>
   </div>
 
-  <!-- ROW 2: Tabla depts + Medidores + Piramide -->
+  <!-- ROW 2: Tabla depts + Medidores + Pirámide -->
   <div class="dash-row r2">
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
           <div class="chart-card__title">Indicadores por departamento</div>
-          <div class="chart-card__sub">Rotacion y absentismo 2024</div>
+          <div class="chart-card__sub">Rotación y absentismo 2024</div>
         </div>
       </div>
       <table class="dash-table">
@@ -111,7 +116,7 @@
           <tr>
             <th>Departamento</th>
             <th>Empleados</th>
-            <th>Rotacion %</th>
+            <th>Rotación %</th>
             <th>Absentismo %</th>
           </tr>
         </thead>
@@ -130,7 +135,7 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Piramide de edad</div>
+          <div class="chart-card__title">Pirámide de edad</div>
           <div class="chart-card__sub"><span style="color:#F97316">&#9632;</span> Mujeres &nbsp;<span style="color:#3B82F6">&#9632;</span> Hombres</div>
         </div>
       </div>
@@ -138,12 +143,12 @@
     </div>
   </div>
 
-  <!-- ROW 3: Lineas rotacion/absentismo -->
+  <!-- ROW 3: Lineas rotación/absentismo -->
   <div class="dash-row r3">
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Evolucion rotacion y absentismo</div>
+          <div class="chart-card__title">Evolución rotación y absentismo</div>
           <div class="chart-card__sub">Mensual 2024 &middot; Con objetivos</div>
         </div>
         <span class="chart-badge">Dual KPI</span>
@@ -163,6 +168,7 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 Chart.defaults.color = '#A1A1AA';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
@@ -247,10 +253,10 @@ depts.forEach(d => {
 
 /* meters */
 const meters = [
-  {label:'Satisfaccion empleados', val:78, bench:75, color:'#10B981'},
-  {label:'Indice formacion',       val:68, bench:70, color:'#F97316'},
-  {label:'Promocion interna',      val:62, bench:60, color:'#FB923C'},
-  {label:'Diversidad genero',      val:44, bench:50, color:'#3B82F6'},
+  {label:'Satisfacción empleados', val:78, bench:75, color:'#10B981'},
+  {label:'Índice formación',       val:68, bench:70, color:'#F97316'},
+  {label:'Promoción interna',      val:62, bench:60, color:'#FB923C'},
+  {label:'Diversidad género',      val:44, bench:50, color:'#3B82F6'},
 ];
 const ml = document.getElementById('meterList');
 meters.forEach(m => {
@@ -296,15 +302,15 @@ ageGroups.forEach(g => {
   </div>`;
 });
 
-/* dual line rotacion/absentismo */
+/* dual line rotación/absentismo */
 new Chart(document.getElementById('dualLine'), {
   type:'line',
   data:{labels:months,datasets:[
-    {label:'Rotacion %',    data:[10.2,9.8,9.5,9.4,9.3,9.2,9.1,9.0,8.8,8.6,8.4,8.3],
+    {label:'Rotación %',    data:[10.2,9.8,9.5,9.4,9.3,9.2,9.1,9.0,8.8,8.6,8.4,8.3],
      borderColor:'#EF4444',borderWidth:2,pointRadius:3,tension:.4,fill:false,pointBackgroundColor:'#EF4444'},
     {label:'Absentismo %',  data:[3.0,3.2,3.1,3.3,3.2,3.0,3.1,3.2,3.0,3.1,3.1,3.1],
      borderColor:'#F59E0B',borderWidth:2,pointRadius:3,tension:.4,fill:false,pointBackgroundColor:'#F59E0B'},
-    {label:'Obj. Rotacion', data:[9,9,9,9,9,9,9,9,9,9,9,9],
+    {label:'Obj. Rotación', data:[9,9,9,9,9,9,9,9,9,9,9,9],
      borderColor:'#EF444450',borderWidth:1.5,borderDash:[6,4],pointRadius:0,fill:false},
     {label:'Obj. Absentismo',data:[3,3,3,3,3,3,3,3,3,3,3,3],
      borderColor:'#F59E0B50',borderWidth:1.5,borderDash:[6,4],pointRadius:0,fill:false},
@@ -318,10 +324,10 @@ new Chart(document.getElementById('dualLine'), {
 
 /* annual goals */
 const goals = [
-  {label:'Rotacion < 8%',     current:8.3,  target:8,   color:'#EF4444', inv:true},
-  {label:'Satisfaccion > 8',  current:7.8,  target:10,  color:'#10B981'},
+  {label:'Rotación < 8%',     current:8.3,  target:8,   color:'#EF4444', inv:true},
+  {label:'Satisfacción > 8',  current:7.8,  target:10,  color:'#10B981'},
   {label:'Absentismo < 3%',   current:3.1,  target:3,   color:'#F59E0B', inv:true},
-  {label:'Cobertura formacion',current:68,  target:80,  color:'#3B82F6'},
+  {label:'Cobertura formación',current:68,  target:80,  color:'#3B82F6'},
 ];
 const ag = document.getElementById('annualGoals');
 goals.forEach(g => {
@@ -337,13 +343,6 @@ goals.forEach(g => {
   </div>`;
 });
 </script>
-<script>
-document.querySelectorAll('.filter-pill').forEach(pill => {
-  pill.addEventListener('click', () => {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-  });
-});
-</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

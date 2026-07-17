@@ -3,7 +3,8 @@
    Dark industrial BI portfolio with orange fire accents
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Las fuentes (Syne, DM Sans, JetBrains Mono) se cargan con <link> en el
+   <head> de cada página, con preconnect — evita la cadena de bloqueo del @import. */
 
 /* ── Variables ─────────────────────────────────────────────── */
 :root {
@@ -998,7 +999,6 @@ body::before {
 
 /* Meter bars */
 .meter-list { display: flex; flex-direction: column; gap: 14px; }
-.meter-item {}
 .meter-item__header {
   display: flex;
   justify-content: space-between;
@@ -1062,4 +1062,19 @@ body::before {
   .kpi-row--5 { grid-template-columns: repeat(2, 1fr); }
 
   .dash-row { grid-template-columns: 1fr !important; }
+}
+
+/* ── ACCESIBILIDAD: usuarios con movimiento reducido ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero__badge-dot, .live-dot::before { animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

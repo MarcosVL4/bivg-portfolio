@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sales Performance Dashboard — BIVG</title>
+  <meta name="description" content="Sales Performance Dashboard — demo interactiva de análisis de ventas con Chart.js. Portfolio BIVG." />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     .dash-row.r1 { grid-template-columns: 8fr 4fr; }
     .dash-row.r2 { grid-template-columns: 5fr 7fr; }
@@ -67,17 +72,17 @@
     <div class="kpi-card" style="--kpi-color: var(--red);">
       <div class="kpi-card__label">Tasa devoluciones</div>
       <div class="kpi-card__value">3.2%</div>
-      <div class="kpi-card__delta up">↓ −0.8pp mejoria</div>
+      <div class="kpi-card__delta up">↓ −0.8pp mejoría</div>
       <canvas class="kpi-card__sparkline" id="spk4"></canvas>
     </div>
   </div>
 
-  <!-- ROW 1: Linea + Donut -->
+  <!-- ROW 1: Línea + Donut -->
   <div class="dash-row r1">
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Evolucion mensual de ventas</div>
+          <div class="chart-card__title">Evolución mensual de ventas</div>
           <div class="chart-card__sub">2024 vs 2023 &middot; Importes en miles €</div>
         </div>
         <span class="chart-badge">Tendencia</span>
@@ -88,7 +93,7 @@
       <div class="chart-card__header">
         <div>
           <div class="chart-card__title">Canal de venta</div>
-          <div class="chart-card__sub">Distribucion de ingresos 2024</div>
+          <div class="chart-card__sub">Distribución de ingresos 2024</div>
         </div>
       </div>
       <canvas id="donutChart" height="200"></canvas>
@@ -120,7 +125,7 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Ventas por categoria y trimestre</div>
+          <div class="chart-card__title">Ventas por categoría y trimestre</div>
           <div class="chart-card__sub">Q1 – Q4 2024 &middot; Miles €</div>
         </div>
       </div>
@@ -133,7 +138,7 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Ventas por region</div>
+          <div class="chart-card__title">Ventas por región</div>
           <div class="chart-card__sub">Acumulado 2024</div>
         </div>
       </div>
@@ -143,7 +148,7 @@
       <div class="chart-card__header">
         <div>
           <div class="chart-card__title">Precio unitario vs Volumen</div>
-          <div class="chart-card__sub">Tamaño = margen bruto &middot; por categoria</div>
+          <div class="chart-card__sub">Tamaño = margen bruto &middot; por categoría</div>
         </div>
         <span class="chart-badge">Bubble</span>
       </div>
@@ -153,6 +158,7 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 /* ── Chart defaults ───────────────────────────────────────── */
 Chart.defaults.color = '#A1A1AA';
@@ -270,7 +276,7 @@ products.forEach((p, i) => {
   </tr>`;
 });
 
-/* ── Grouped bars (categoria x trimestre) ─────────────────── */
+/* ── Grouped bars (categoría x trimestre) ─────────────────── */
 new Chart(document.getElementById('barGrouped'), {
   type: 'bar',
   data: {
@@ -342,13 +348,6 @@ new Chart(document.getElementById('bubbleChart'), {
   }
 });
 </script>
-<script>
-document.querySelectorAll('.filter-pill').forEach(pill => {
-  pill.addEventListener('click', () => {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-  });
-});
-</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

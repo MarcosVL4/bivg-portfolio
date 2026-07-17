@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Operations Control Tower — BIVG</title>
+  <meta name="description" content="Operations Control Tower — demo interactiva de KPIs operativos con Chart.js. Portfolio BIVG." />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     .dash-row.r1 { grid-template-columns: 4fr 8fr; }
     .dash-row.r2 { grid-template-columns: 5fr 7fr; }
@@ -50,7 +55,7 @@
       <button class="filter-pill active">Hoy</button>
       <button class="filter-pill">Esta semana</button>
       <button class="filter-pill">Mes</button>
-      <button class="filter-pill">Todas las lineas</button>
+      <button class="filter-pill">Todas las líneas</button>
       <span class="live-dot">live</span>
     </div>
   </div>
@@ -81,18 +86,18 @@
     <div class="kpi-card" style="--kpi-color: var(--red);">
       <div class="kpi-card__label">Tasa defectos</div>
       <div class="kpi-card__value">1.8%</div>
-      <div class="kpi-card__delta up">↓ −0.4pp mejoria</div>
+      <div class="kpi-card__delta up">↓ −0.4pp mejoría</div>
       <canvas class="kpi-card__sparkline" id="spk4"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--green);">
       <div class="kpi-card__label">Lead time medio</div>
       <div class="kpi-card__value">2.3d</div>
-      <div class="kpi-card__delta up">↓ −0.2d mejoria</div>
+      <div class="kpi-card__delta up">↓ −0.2d mejoría</div>
       <canvas class="kpi-card__sparkline" id="spk5"></canvas>
     </div>
   </div>
 
-  <!-- ROW 1: OEE gauge + Produccion diaria -->
+  <!-- ROW 1: OEE gauge + Producción diaria -->
   <div class="dash-row r1">
     <div class="chart-card">
       <div class="chart-card__header">
@@ -144,28 +149,28 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Produccion diaria — Ultimo mes</div>
+          <div class="chart-card__title">Producción diaria — Último mes</div>
           <div class="chart-card__sub">Real vs Objetivo &middot; Unidades producidas</div>
         </div>
-        <span class="chart-badge">20 dias lab.</span>
+        <span class="chart-badge">20 días lab.</span>
       </div>
       <canvas id="prodChart" height="120"></canvas>
     </div>
   </div>
 
-  <!-- ROW 2: Tabla lineas + Pedidos mensual -->
+  <!-- ROW 2: Tabla líneas + Pedidos mensual -->
   <div class="dash-row r2">
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Estado de lineas de produccion</div>
+          <div class="chart-card__title">Estado de líneas de producción</div>
           <div class="chart-card__sub">Turno actual</div>
         </div>
       </div>
       <table class="dash-table">
         <thead>
           <tr>
-            <th>Linea</th>
+            <th>Línea</th>
             <th>OEE %</th>
             <th>Uds/h</th>
             <th>Estado</th>
@@ -191,7 +196,7 @@
       <div class="chart-card__header">
         <div>
           <div class="chart-card__title">Heatmap Lead Time</div>
-          <div class="chart-card__sub">5 dias x 8 semanas &middot; Dias habiles &middot; Verde = rapido, Rojo = lento</div>
+          <div class="chart-card__sub">5 días × 8 semanas &middot; Días hábiles &middot; Verde = rapido, Rojo = lento</div>
         </div>
       </div>
       <div id="heatmapContainer"></div>
@@ -210,6 +215,7 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 Chart.defaults.color = '#A1A1AA';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
@@ -228,7 +234,7 @@ mkSpk('spk3',[980,1020,1100,1050,1150,1180,1120,1200,1150,1220,1200,1247],'#3B82
 mkSpk('spk4',[2.8,2.7,2.6,2.6,2.5,2.4,2.3,2.3,2.2,2.1,1.9,1.8],'#EF4444');
 mkSpk('spk5',[3.0,2.9,2.8,2.7,2.7,2.6,2.6,2.5,2.5,2.4,2.3,2.3],'#10B981');
 
-/* Produccion diaria */
+/* Producción diaria */
 const dias = Array.from({length:20},(_,i)=>`D${i+1}`);
 const objetivo = Array(20).fill(1200);
 const real = [1180,1210,1190,1230,1150,1260,1240,1220,1280,1195,1270,1250,1300,1185,1260,1240,1290,1310,1275,1247];
@@ -246,20 +252,20 @@ new Chart(document.getElementById('prodChart'), {
     y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},min:1050}}}
 });
 
-/* Tabla lineas */
+/* Tabla líneas */
 const lineas = [
-  {name:'Linea A1', oee:91.2, udsh:145, estado:'Operativa'},
-  {name:'Linea A2', oee:88.4, udsh:138, estado:'Operativa'},
-  {name:'Linea B1', oee:85.1, udsh:128, estado:'Operativa'},
-  {name:'Linea B2', oee:72.3, udsh:109, estado:'Atencion'},
-  {name:'Linea C1', oee:94.8, udsh:162, estado:'Operativa'},
-  {name:'Linea C2', oee:0,    udsh:0,   estado:'Parada'},
-  {name:'Linea D1', oee:89.6, udsh:142, estado:'Operativa'},
-  {name:'Linea D2', oee:68.2, udsh:102, estado:'Atencion'},
+  {name:'Línea A1', oee:91.2, udsh:145, estado:'Operativa'},
+  {name:'Línea A2', oee:88.4, udsh:138, estado:'Operativa'},
+  {name:'Línea B1', oee:85.1, udsh:128, estado:'Operativa'},
+  {name:'Línea B2', oee:72.3, udsh:109, estado:'Atención'},
+  {name:'Línea C1', oee:94.8, udsh:162, estado:'Operativa'},
+  {name:'Línea C2', oee:0,    udsh:0,   estado:'Parada'},
+  {name:'Línea D1', oee:89.6, udsh:142, estado:'Operativa'},
+  {name:'Línea D2', oee:68.2, udsh:102, estado:'Atención'},
 ];
 const lt = document.getElementById('linesTable');
 lineas.forEach(l => {
-  const estadoCls = l.estado==='Operativa'?'green':l.estado==='Atencion'?'amber':'red';
+  const estadoCls = l.estado==='Operativa'?'green':l.estado==='Atención'?'amber':'red';
   lt.innerHTML += `<tr>
     <td style="font-weight:500;color:var(--text-primary);font-size:.82rem;">${l.name}</td>
     <td><span style="font-family:var(--font-mono);font-size:.75rem;color:${l.oee>85?'#10B981':l.oee>70?'#F59E0B':'#EF4444'}">${l.oee>0?l.oee+'%':'—'}</span></td>
@@ -287,7 +293,7 @@ new Chart(document.getElementById('ordersChart'), {
 
 /* Heatmap lead time */
 (function buildHeatmap() {
-  const days = ['Lun','Mar','Mie','Jue','Vie'];
+  const days = ['Lun','Mar','Mié','Jue','Vie'];
   const weeks = 8;
   const data = [];
   for (let w = 0; w < weeks; w++) {
@@ -331,7 +337,7 @@ new Chart(document.getElementById('ordersChart'), {
 
 /* Pareto */
 const defectos = [
-  {cause:'Ajuste maquina', n:182},
+  {cause:'Ajuste máquina', n:182},
   {cause:'Material defect.', n:128},
   {cause:'Operador',        n:94},
   {cause:'Herramienta',     n:72},
@@ -347,7 +353,7 @@ new Chart(document.getElementById('paretoChart'), {
   data:{
     labels: defectos.map(d=>d.cause),
     datasets:[
-      {label:'Defectos', data:defectos.map(d=>d.n),backgroundColor:'#F9731380',borderColor:'#F97316',borderWidth:1,borderRadius:3},
+      {label:'Defectos', data:defectos.map(d=>d.n),backgroundColor:'#F9731680',borderColor:'#F97316',borderWidth:1,borderRadius:3},
       {label:'% Acum.', data:cumPcts,type:'line',yAxisID:'y2',borderColor:'#EF4444',borderWidth:2.5,
        pointRadius:4,pointBackgroundColor:'#EF4444',tension:.3,fill:false}
     ]
@@ -356,19 +362,12 @@ new Chart(document.getElementById('paretoChart'), {
     plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14}},tooltip:{...T,mode:'index',intersect:false}},
     scales:{
       x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'}},
-      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},title:{display:true,text:'Num. defectos',color:'#52525B'}},
+      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},title:{display:true,text:'Núm. defectos',color:'#52525B'}},
       y2:{position:'right',grid:{display:false},ticks:{color:'#EF4444',callback:v=>v+'%'},
           title:{display:true,text:'% acumulado',color:'#EF4444'},min:0,max:100}
     }}
 });
 </script>
-<script>
-document.querySelectorAll('.filter-pill').forEach(pill => {
-  pill.addEventListener('click', () => {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-  });
-});
-</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
