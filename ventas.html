@@ -5,12 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sales Performance Dashboard — BIVG</title>
   <meta name="description" content="Sales Performance Dashboard — demo interactiva de análisis de ventas con Chart.js. Portfolio BIVG." />
+  <link rel="canonical" href="https://bivg.es/ventas.html" />
   <meta property="og:title" content="Sales Performance Dashboard — BIVG" />
   <meta property="og:description" content="Demo interactiva de análisis de ventas con Chart.js." />
+  <meta property="og:url" content="https://bivg.es/ventas.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BIVG" />
+  <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="https://bivg.es/assets/img/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sales Performance Dashboard — BIVG" />
+  <meta name="twitter:description" content="Demo interactiva de análisis de ventas con Chart.js." />
+  <meta name="twitter:image" content="https://bivg.es/assets/img/og-card.png" />
   <meta name="theme-color" content="#09090B" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -29,19 +41,20 @@
   </style>
 </head>
 <body class="dash-page">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar__inner">
     <div class="topbar__brand">
       <div class="topbar__logo">BI<span>VG</span></div>
-      <a href="index.html" class="topbar__back">← bivg.es</a>
+      <a href="index.html" class="topbar__back" aria-label="Volver a la portada de bivg.es">← bivg.es</a>
     </div>
     <div class="topbar__center">
-      <div class="topbar__title">Sales Performance Dashboard</div>
+      <h1 class="topbar__title">Sales Performance Dashboard</h1>
       <div class="topbar__subtitle">Datos de muestra &middot; 2024 &middot; Actualizado ene 2025</div>
     </div>
-    <div class="topbar__controls">
+    <div class="topbar__controls" role="group" aria-label="Filtros del informe">
       <button class="filter-pill active">2024</button>
       <button class="filter-pill">2023</button>
       <button class="filter-pill">Q4 2024</button>
@@ -51,7 +64,7 @@
   </div>
 </header>
 
-<main class="dash-body">
+<main class="dash-body" id="main-content" tabindex="-1">
 
   <!-- KPI ROW -->
   <div class="kpi-row kpi-row--4">
@@ -59,25 +72,25 @@
       <div class="kpi-card__label">Ventas YTD</div>
       <div class="kpi-card__value">2.41M€</div>
       <div class="kpi-card__delta up">↑ +14.3% vs año anterior</div>
-      <canvas class="kpi-card__sparkline" id="spk1"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk1"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--green);">
       <div class="kpi-card__label">Unidades vendidas</div>
       <div class="kpi-card__value">38,240</div>
       <div class="kpi-card__delta up">↑ +8.7% unidades</div>
-      <canvas class="kpi-card__sparkline" id="spk2"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk2"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: #F59E0B;">
       <div class="kpi-card__label">Ticket medio</div>
       <div class="kpi-card__value">63.1€</div>
       <div class="kpi-card__delta up">↑ +5.1% por pedido</div>
-      <canvas class="kpi-card__sparkline" id="spk3"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk3"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--red);">
       <div class="kpi-card__label">Tasa devoluciones</div>
       <div class="kpi-card__value">3.2%</div>
       <div class="kpi-card__delta up">↓ −0.8pp mejoría</div>
-      <canvas class="kpi-card__sparkline" id="spk4"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk4"></canvas>
     </div>
   </div>
 
@@ -86,21 +99,21 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Evolución mensual de ventas</div>
+          <h2 class="chart-card__title">Evolución mensual de ventas</h2>
           <div class="chart-card__sub">2024 vs 2023 &middot; Importes en miles €</div>
         </div>
         <span class="chart-badge">Tendencia</span>
       </div>
-      <canvas id="lineChart" height="90"></canvas>
+      <canvas id="lineChart" height="90" role="img" aria-label="Gráfico de líneas con la evolución mensual de ventas de 2024 frente a 2023, en miles de euros"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Canal de venta</div>
+          <h2 class="chart-card__title">Canal de venta</h2>
           <div class="chart-card__sub">Distribución de ingresos 2024</div>
         </div>
       </div>
-      <canvas id="donutChart" height="200"></canvas>
+      <canvas id="donutChart" height="200" role="img" aria-label="Gráfico de anillo con la distribución de ingresos de 2024 por canal de venta: tienda física, e-commerce, distribuidores y mayoristas"></canvas>
     </div>
   </div>
 
@@ -109,11 +122,12 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Top 8 productos</div>
+          <h2 class="chart-card__title">Top 8 productos</h2>
           <div class="chart-card__sub">Ventas acumuladas 2024</div>
         </div>
       </div>
       <table class="dash-table">
+        <caption class="visually-hidden">Top 8 productos por ventas acumuladas en 2024</caption>
         <thead>
           <tr>
             <th>#</th>
@@ -129,11 +143,11 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Ventas por categoría y trimestre</div>
+          <h2 class="chart-card__title">Ventas por categoría y trimestre</h2>
           <div class="chart-card__sub">Q1 – Q4 2024 &middot; Miles €</div>
         </div>
       </div>
-      <canvas id="barGrouped" height="110"></canvas>
+      <canvas id="barGrouped" height="110" role="img" aria-label="Gráfico de barras agrupadas con las ventas por categoría y trimestre de 2024, en miles de euros"></canvas>
     </div>
   </div>
 
@@ -142,7 +156,7 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Ventas por región</div>
+          <h2 class="chart-card__title">Ventas por región</h2>
           <div class="chart-card__sub">Acumulado 2024</div>
         </div>
       </div>
@@ -151,19 +165,20 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Precio unitario vs Volumen</div>
+          <h2 class="chart-card__title">Precio unitario vs Volumen</h2>
           <div class="chart-card__sub">Tamaño = margen bruto &middot; por categoría</div>
         </div>
         <span class="chart-badge">Bubble</span>
       </div>
-      <canvas id="bubbleChart" height="200"></canvas>
+      <canvas id="bubbleChart" height="200" role="img" aria-label="Gráfico de burbujas que compara precio unitario y volumen por categoría; el tamaño de cada burbuja representa el margen bruto"></canvas>
     </div>
   </div>
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <script>
+document.addEventListener('DOMContentLoaded', function () {
 /* ── Chart defaults ───────────────────────────────────────── */
 Chart.defaults.color = '#A1A1AA';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
@@ -344,14 +359,15 @@ new Chart(document.getElementById('bubbleChart'), {
       }}
     },
     scales: {
-      x: { grid: { color: '#27272A' }, title: { display: true, text: 'Precio unitario (€)', color: '#52525B' },
+      x: { grid: { color: '#27272A' }, title: { display: true, text: 'Precio unitario (€)', color: '#8B8B94' },
            ticks: { color: '#A1A1AA' } },
-      y: { grid: { color: '#27272A' }, title: { display: true, text: 'Volumen (uds)', color: '#52525B' },
+      y: { grid: { color: '#27272A' }, title: { display: true, text: 'Volumen (uds)', color: '#8B8B94' },
            ticks: { color: '#A1A1AA' } }
     }
   }
 });
+});
 </script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>

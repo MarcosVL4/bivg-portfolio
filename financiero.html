@@ -4,13 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Financial Performance Dashboard — BIVG</title>
-  <meta name="description" content="Financial Performance Dashboard — demo interactiva de P&L y cashflow con Chart.js. Portfolio BIVG." />
+  <meta name="description" content="Financial Performance Dashboard — demo interactiva de P&amp;L y cashflow con Chart.js. Portfolio BIVG." />
+  <link rel="canonical" href="https://bivg.es/financiero.html" />
   <meta property="og:title" content="Financial Performance Dashboard — BIVG" />
-  <meta property="og:description" content="Demo interactiva de P&L y cashflow con Chart.js." />
+  <meta property="og:description" content="Demo interactiva de P&amp;L y cashflow con Chart.js." />
+  <meta property="og:url" content="https://bivg.es/financiero.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BIVG" />
+  <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="https://bivg.es/assets/img/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Financial Performance Dashboard — BIVG" />
+  <meta name="twitter:description" content="Demo interactiva de P&amp;L y cashflow con Chart.js." />
+  <meta name="twitter:image" content="https://bivg.es/assets/img/og-card.png" />
   <meta name="theme-color" content="#09090B" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -53,19 +65,20 @@
   </style>
 </head>
 <body class="dash-page">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar__inner">
     <div class="topbar__brand">
       <div class="topbar__logo">BI<span>VG</span></div>
-      <a href="index.html" class="topbar__back">← bivg.es</a>
+      <a href="index.html" class="topbar__back" aria-label="Volver a la portada de bivg.es">← bivg.es</a>
     </div>
     <div class="topbar__center">
-      <div class="topbar__title">Financial Performance Dashboard</div>
+      <h1 class="topbar__title">Financial Performance Dashboard</h1>
       <div class="topbar__subtitle">Datos de muestra &middot; 2024 &middot; Cierre provisional</div>
     </div>
-    <div class="topbar__controls">
+    <div class="topbar__controls" role="group" aria-label="Filtros del informe">
       <button class="filter-pill active">YTD 2024</button>
       <button class="filter-pill">2023</button>
       <button class="filter-pill">Q4 2024</button>
@@ -75,7 +88,7 @@
   </div>
 </header>
 
-<main class="dash-body">
+<main class="dash-body" id="main-content" tabindex="-1">
 
   <!-- KPI ROW (5) -->
   <div class="kpi-row kpi-row--5">
@@ -83,31 +96,31 @@
       <div class="kpi-card__label">Ingresos YTD</div>
       <div class="kpi-card__value">8.74M€</div>
       <div class="kpi-card__delta up">↑ +11.2% vs 2023</div>
-      <canvas class="kpi-card__sparkline" id="spk1"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk1"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: #14B8A6;">
       <div class="kpi-card__label">Margen bruto</div>
       <div class="kpi-card__value">42.8%</div>
       <div class="kpi-card__delta up">↑ +1.4pp</div>
-      <canvas class="kpi-card__sparkline" id="spk2"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk2"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--orange);">
       <div class="kpi-card__label">EBITDA</div>
       <div class="kpi-card__value">1.62M€</div>
       <div class="kpi-card__delta up">↑ Margen 18.5%</div>
-      <canvas class="kpi-card__sparkline" id="spk3"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk3"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: #F59E0B;">
       <div class="kpi-card__label">Cashflow libre</div>
       <div class="kpi-card__value">1.08M€</div>
       <div class="kpi-card__delta up">↑ +24.1%</div>
-      <canvas class="kpi-card__sparkline" id="spk4"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk4"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--red);">
       <div class="kpi-card__label">Desv. presupuesto</div>
       <div class="kpi-card__value">−3.1%</div>
       <div class="kpi-card__delta up">↑ Dentro ±5%</div>
-      <canvas class="kpi-card__sparkline" id="spk5"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk5"></canvas>
     </div>
   </div>
 
@@ -116,21 +129,22 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Waterfall P&amp;L 2024</div>
+          <h2 class="chart-card__title">Waterfall P&amp;L 2024</h2>
           <div class="chart-card__sub">Ingresos → EBIT &middot; Miles €</div>
         </div>
         <span class="chart-badge">P&amp;L Bridge</span>
       </div>
-      <canvas id="waterfallChart" height="130"></canvas>
+      <canvas id="waterfallChart" height="130" role="img" aria-label="Gráfico waterfall de la cuenta de resultados de 2024, desde ingresos hasta EBIT, en miles de euros"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Cuenta de resultados</div>
+          <h2 class="chart-card__title">Cuenta de resultados</h2>
           <div class="chart-card__sub">Resumen ejecutivo 2024</div>
         </div>
       </div>
       <table class="pl-table">
+        <caption class="visually-hidden">Cuenta de resultados resumida de 2024, en miles de euros y porcentaje sobre ingresos</caption>
         <tbody>
           <tr class="pl-section-header"><td colspan="3">INGRESOS</td></tr>
           <tr><td class="pl-indent">Ventas netas</td><td class="pl-val-pos">8.740K€</td><td class="pl-pct">100%</td></tr>
@@ -156,17 +170,17 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Ingresos mensuales 2024 vs 2023</div>
+          <h2 class="chart-card__title">Ingresos mensuales 2024 vs 2023</h2>
           <div class="chart-card__sub">Barras + EBITDA % en eje secundario</div>
         </div>
         <span class="chart-badge">Dual axis</span>
       </div>
-      <canvas id="revenueChart" height="120"></canvas>
+      <canvas id="revenueChart" height="120" role="img" aria-label="Gráfico de barras con los ingresos mensuales de 2024 frente a 2023 y una línea con el margen EBITDA"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Budget vs Real por área</div>
+          <h2 class="chart-card__title">Budget vs Real por área</h2>
           <div class="chart-card__sub">Desviación 2024</div>
         </div>
       </div>
@@ -179,19 +193,20 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Cashflow mensual 2024</div>
+          <h2 class="chart-card__title">Cashflow mensual 2024</h2>
           <div class="chart-card__sub">Operativo / Inversión / Financiación + FCF neto</div>
         </div>
         <span class="chart-badge">Stacked + FCF</span>
       </div>
-      <canvas id="cashflowChart" height="80"></canvas>
+      <canvas id="cashflowChart" height="80" role="img" aria-label="Gráfico de barras apiladas con el cashflow mensual de 2024, separando operativo, inversión y financiación, y una línea con el flujo de caja libre neto"></canvas>
     </div>
   </div>
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <script>
+document.addEventListener('DOMContentLoaded', function () {
 Chart.defaults.color = '#A1A1AA';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
 Chart.defaults.font.size = 11;
@@ -327,7 +342,8 @@ new Chart(document.getElementById('cashflowChart'), {
       y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA',callback:v=>v+'K€'},stacked:true}
     }}
 });
+});
 </script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>

@@ -20,19 +20,30 @@
   const burger = document.querySelector('.nav__burger');
   const mobileMenu = document.querySelector('.nav__mobile');
   if (burger && mobileMenu) {
+    const closeMenu = () => {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Abrir menú');
+    };
+
     burger.addEventListener('click', () => {
       const isOpen = burger.classList.toggle('open');
       mobileMenu.classList.toggle('open', isOpen);
       burger.setAttribute('aria-expanded', String(isOpen));
+      burger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     });
 
     // Close when a link is clicked
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        burger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && burger.classList.contains('open')) {
+        closeMenu();
+        burger.focus();
+      }
     });
   }
 

@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BIVG — Business Intelligence & Data Analytics</title>
+  <title>BIVG — Business Intelligence &amp; Data Analytics</title>
   <meta name="description" content="Portfolio de Marcos — Especialista en Business Intelligence. Power BI, DAX avanzado, SQL Server, ETL y automatización de procesos. Microsoft Certified PL-300." />
-  <link rel="canonical" href="https://bivg.es" />
+  <link rel="canonical" href="https://bivg.es/" />
   <meta property="og:title" content="BIVG — Business Intelligence Portfolio" />
   <meta property="og:description" content="Datos que cuentan historias. Decisiones que generan valor." />
-  <meta property="og:url" content="https://bivg.es" />
+  <meta property="og:url" content="https://bivg.es/" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BIVG" />
+  <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="https://bivg.es/assets/img/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BIVG — Business Intelligence Portfolio" />
   <meta name="twitter:description" content="Datos que cuentan historias. Decisiones que generan valor." />
   <meta name="twitter:image" content="https://bivg.es/assets/img/og-card.png" />
+  <meta name="twitter:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
   <meta name="theme-color" content="#09090B" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,11 +29,12 @@
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 
 <!-- ── NAV ─────────────────────────────────────────────────── -->
-<nav class="nav" id="main-nav">
+<nav class="nav" id="main-nav" aria-label="Navegación principal">
   <div class="nav__inner">
-    <a href="index.html" class="nav__logo">BI<span>VG</span></a>
+    <a href="index.html" class="nav__logo" aria-label="BIVG, ir al inicio">BI<span>VG</span></a>
     <ul class="nav__links">
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
@@ -37,17 +42,19 @@
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a href="#contacto" class="nav__cta">Contactar</a>
-    <button class="nav__burger" aria-label="Menú" aria-expanded="false">
+    <button class="nav__burger" type="button" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
-  <div class="nav__mobile" role="navigation">
+  <div class="nav__mobile" id="mobile-menu" role="navigation" aria-label="Navegación móvil">
     <a href="#sobre-mi">Sobre mí</a>
     <a href="#portfolio">Portfolio</a>
     <a href="#stack">Stack</a>
     <a href="#contacto">Contacto</a>
   </div>
 </nav>
+
+<main id="main-content" tabindex="-1">
 
 <!-- ── HERO ─────────────────────────────────────────────────── -->
 <section class="hero">
@@ -57,7 +64,7 @@
     <div class="hero__inner">
       <div class="hero__content">
         <div class="hero__badge">
-          <span class="hero__badge-dot"></span>
+          <span class="hero__badge-dot" aria-hidden="true"></span>
           Microsoft Certified &middot; PL-300 &middot; Power BI Data Analyst
         </div>
         <h1 class="hero__h1">
@@ -94,12 +101,12 @@
 <!-- ── CERT BANNER ──────────────────────────────────────────── -->
 <div class="container" style="padding-bottom: 64px; position:relative; z-index:1;">
   <div class="cert-banner reveal">
-    <span class="cert-banner__icon">🏆</span>
+    <span class="cert-banner__icon" aria-hidden="true">🏆</span>
     <div class="cert-banner__body">
       <div class="cert-banner__title">Microsoft Certified: Power BI Data Analyst Associate</div>
       <div class="cert-banner__desc">Certificación oficial de Microsoft que acredita competencia avanzada en modelado de datos, DAX, Power Query y publicación en Power BI Service.</div>
     </div>
-    <a class="cert-badge" href="https://learn.microsoft.com/api/credentials/share/es-es/Marcos-6363/B257FB48FBDECB53?sharingId=D86A6103BB93D4D9" target="_blank" rel="noopener" title="Ver mi credencial verificada en Microsoft Learn">PL-300 ↗</a>
+    <a class="cert-badge" href="https://learn.microsoft.com/api/credentials/share/es-es/Marcos-6363/B257FB48FBDECB53?sharingId=D86A6103BB93D4D9" target="_blank" rel="noopener" aria-label="Ver la credencial PL-300 verificada en Microsoft Learn (se abre en una pestaña nueva)" title="Ver mi credencial verificada en Microsoft Learn">PL-300 ↗</a>
   </div>
 </div>
 
@@ -112,8 +119,8 @@
 
     <div class="about__grid">
       <div class="about-card reveal">
-        <span class="about-card__icon">📊</span>
-        <div class="about-card__title">Power BI &amp; DAX Avanzado</div>
+        <span class="about-card__icon" aria-hidden="true">📊</span>
+        <h3 class="about-card__title">Power BI &amp; DAX Avanzado</h3>
         <p class="about-card__desc">Modelos de datos estrella/copo de nieve, medidas DAX de alta complejidad, Row-Level Security y optimización de rendimiento.</p>
         <div class="tags">
           <span class="tag">DAX</span>
@@ -123,8 +130,8 @@
         </div>
       </div>
       <div class="about-card reveal">
-        <span class="about-card__icon">🗄️</span>
-        <div class="about-card__title">SQL Server &amp; Administración</div>
+        <span class="about-card__icon" aria-hidden="true">🗄️</span>
+        <h3 class="about-card__title">SQL Server &amp; Administración</h3>
         <p class="about-card__desc">Diseño y administración de bases de datos relacionales, stored procedures, índices, jobs de mantenimiento y migraciones.</p>
         <div class="tags">
           <span class="tag">SQL Server 2019</span>
@@ -134,8 +141,8 @@
         </div>
       </div>
       <div class="about-card reveal">
-        <span class="about-card__icon">🔗</span>
-        <div class="about-card__title">Integración de Datos</div>
+        <span class="about-card__icon" aria-hidden="true">🔗</span>
+        <h3 class="about-card__title">Integración de Datos</h3>
         <p class="about-card__desc">Pipelines ETL/ELT robustos, conexión a APIs REST, transformación de ficheros Excel/CSV y gestión de infraestructura virtualizada.</p>
         <div class="tags">
           <span class="tag">ETL</span>
@@ -145,8 +152,8 @@
         </div>
       </div>
       <div class="about-card reveal">
-        <span class="about-card__icon">⚙️</span>
-        <div class="about-card__title">Automatización &amp; DevOps BI</div>
+        <span class="about-card__icon" aria-hidden="true">⚙️</span>
+        <h3 class="about-card__title">Automatización &amp; DevOps BI</h3>
         <p class="about-card__desc">Control de versiones de informes Power BI, despliegue en pipelines de Fabric, gestión de workspaces y API REST de Power BI.</p>
         <div class="tags">
           <span class="tag">Git</span>
@@ -171,7 +178,7 @@
       <!-- Ventas -->
       <a href="ventas.html" class="port-card reveal">
         <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
             <rect width="480" height="220" fill="#18181B"/>
             <!-- grid lines -->
             <line x1="0" y1="55" x2="480" y2="55" stroke="#27272A" stroke-width="1"/>
@@ -209,7 +216,7 @@
         </div>
         <div class="port-card__body">
           <div class="port-card__cat">Sales Analytics</div>
-          <div class="port-card__title">Sales Performance Dashboard</div>
+          <h3 class="port-card__title">Sales Performance Dashboard</h3>
           <p class="port-card__desc">Análisis completo de ventas YTD, evolución mensual vs año anterior, top productos y desglose por canal y región.</p>
           <div class="port-card__footer">
             <div class="port-card__kpis tags">
@@ -225,7 +232,7 @@
       <!-- RRHH -->
       <a href="rrhh.html" class="port-card reveal">
         <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
             <rect width="480" height="220" fill="#18181B"/>
             <!-- donut -->
             <circle cx="160" cy="110" r="72" fill="none" stroke="#27272A" stroke-width="28"/>
@@ -256,7 +263,7 @@
         </div>
         <div class="port-card__body">
           <div class="port-card__cat">HR Analytics</div>
-          <div class="port-card__title">HR Analytics Dashboard</div>
+          <h3 class="port-card__title">HR Analytics Dashboard</h3>
           <p class="port-card__desc">Visión 360 del capital humano: plantilla, rotación, absentismo, satisfacción y pirámide demográfica por departamento.</p>
           <div class="port-card__footer">
             <div class="port-card__kpis tags">
@@ -272,7 +279,7 @@
       <!-- Financiero -->
       <a href="financiero.html" class="port-card reveal">
         <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
             <rect width="480" height="220" fill="#18181B"/>
             <!-- grid -->
             <line x1="0" y1="60" x2="480" y2="60" stroke="#27272A" stroke-width="1"/>
@@ -316,7 +323,7 @@
         </div>
         <div class="port-card__body">
           <div class="port-card__cat">Financial Analytics</div>
-          <div class="port-card__title">Financial Performance Dashboard</div>
+          <h3 class="port-card__title">Financial Performance Dashboard</h3>
           <p class="port-card__desc">Cuenta de resultados ejecutiva, waterfall P&amp;L, comparativa budget vs real y análisis de cashflow mensual.</p>
           <div class="port-card__footer">
             <div class="port-card__kpis tags">
@@ -332,7 +339,7 @@
       <!-- Operaciones -->
       <a href="operaciones.html" class="port-card reveal">
         <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
             <rect width="480" height="220" fill="#18181B"/>
             <!-- gauge background arc -->
             <defs>
@@ -360,7 +367,7 @@
         </div>
         <div class="port-card__body">
           <div class="port-card__cat">Operations Analytics</div>
-          <div class="port-card__title">Operations Control Tower</div>
+          <h3 class="port-card__title">Operations Control Tower</h3>
           <p class="port-card__desc">Torre de control operativo: OEE, producción diaria vs objetivo, estado de líneas, lead time y análisis de defectos Pareto.</p>
           <div class="port-card__footer">
             <div class="port-card__kpis tags">
@@ -386,62 +393,62 @@
 
     <div class="stack__grid">
       <div class="stack-item reveal">
-        <span class="stack-item__icon">📊</span>
+        <span class="stack-item__icon" aria-hidden="true">📊</span>
         <span class="stack-item__name">Power BI</span>
         <span class="stack-item__level">Experto</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">🧮</span>
+        <span class="stack-item__icon" aria-hidden="true">🧮</span>
         <span class="stack-item__name">DAX</span>
         <span class="stack-item__level">Avanzado</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">⚡</span>
+        <span class="stack-item__icon" aria-hidden="true">⚡</span>
         <span class="stack-item__name">Power Query</span>
         <span class="stack-item__level">Avanzado</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">🗄️</span>
+        <span class="stack-item__icon" aria-hidden="true">🗄️</span>
         <span class="stack-item__name">SQL Server</span>
         <span class="stack-item__level">Avanzado</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">💾</span>
+        <span class="stack-item__icon" aria-hidden="true">💾</span>
         <span class="stack-item__name">T-SQL</span>
         <span class="stack-item__level">Avanzado</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">🔷</span>
+        <span class="stack-item__icon" aria-hidden="true">🔷</span>
         <span class="stack-item__name">PowerShell</span>
         <span class="stack-item__level">Intermedio</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">🐍</span>
+        <span class="stack-item__icon" aria-hidden="true">🐍</span>
         <span class="stack-item__name">Python</span>
         <span class="stack-item__level">Intermedio</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">🖥️</span>
+        <span class="stack-item__icon" aria-hidden="true">🖥️</span>
         <span class="stack-item__name">Windows Server</span>
         <span class="stack-item__level">Avanzado</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">🌿</span>
+        <span class="stack-item__icon" aria-hidden="true">🌿</span>
         <span class="stack-item__name">Git / Fabric</span>
         <span class="stack-item__level">Intermedio</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">🔲</span>
+        <span class="stack-item__icon" aria-hidden="true">🔲</span>
         <span class="stack-item__name">Proxmox</span>
         <span class="stack-item__level">Intermedio</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">⚛️</span>
+        <span class="stack-item__icon" aria-hidden="true">⚛️</span>
         <span class="stack-item__name">React / Vite</span>
         <span class="stack-item__level">Intermedio</span>
       </div>
       <div class="stack-item reveal">
-        <span class="stack-item__icon">☁️</span>
+        <span class="stack-item__icon" aria-hidden="true">☁️</span>
         <span class="stack-item__name">Power BI Service</span>
         <span class="stack-item__level">Avanzado</span>
       </div>
@@ -458,14 +465,14 @@
 
     <div class="contact__grid">
       <a href="mailto:marcos@bivg.es" class="contact-card reveal">
-        <span class="contact-card__icon">✉️</span>
+        <span class="contact-card__icon" aria-hidden="true">✉️</span>
         <div>
           <span class="contact-card__label">Email</span>
           <span class="contact-card__value">marcos@bivg.es</span>
         </div>
       </a>
-      <a href="https://es.linkedin.com/in/marcos-vallespi" target="_blank" rel="noopener" class="contact-card reveal">
-        <span class="contact-card__icon">💼</span>
+      <a href="https://es.linkedin.com/in/marcos-vallespi" target="_blank" rel="noopener" class="contact-card reveal" aria-label="LinkedIn: Marcos Vallespí (se abre en una pestaña nueva)">
+        <span class="contact-card__icon" aria-hidden="true">💼</span>
         <div>
           <span class="contact-card__label">LinkedIn</span>
           <span class="contact-card__value">Marcos Vallespí</span>
@@ -474,6 +481,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ── FOOTER ────────────────────────────────────────────────── -->
 <footer class="footer">
@@ -486,6 +495,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>

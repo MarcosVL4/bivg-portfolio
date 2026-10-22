@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /assets/img/og-card-source.html
 
 Sitemap: https://bivg.es/sitemap.xml

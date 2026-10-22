@@ -5,12 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Operations Control Tower — BIVG</title>
   <meta name="description" content="Operations Control Tower — demo interactiva de KPIs operativos con Chart.js. Portfolio BIVG." />
+  <link rel="canonical" href="https://bivg.es/operaciones.html" />
   <meta property="og:title" content="Operations Control Tower — BIVG" />
   <meta property="og:description" content="Demo interactiva de KPIs operativos con Chart.js." />
+  <meta property="og:url" content="https://bivg.es/operaciones.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BIVG" />
+  <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="https://bivg.es/assets/img/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Operations Control Tower — BIVG" />
+  <meta name="twitter:description" content="Demo interactiva de KPIs operativos con Chart.js." />
+  <meta name="twitter:image" content="https://bivg.es/assets/img/og-card.png" />
   <meta name="theme-color" content="#09090B" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -33,7 +45,7 @@
     .heatmap-wrap { overflow-x: auto; }
     .heatmap-grid { display: grid; gap: 3px; }
     .heatmap-cell { width: 100%; aspect-ratio: 1.6; border-radius: 3px; display: flex; align-items: center;
-      justify-content: center; font-family: var(--font-mono); font-size: 0.58rem; color: rgba(0,0,0,0.7);
+      justify-content: center; font-family: var(--font-mono); font-size: 0.58rem; color: #09090B;
       font-weight: 600; cursor: default; transition: transform .15s; }
     .heatmap-cell:hover { transform: scale(1.15); z-index: 2; }
     .heatmap-day-labels { display: grid; gap: 3px; margin-bottom: 3px; }
@@ -43,19 +55,20 @@
   </style>
 </head>
 <body class="dash-page">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar__inner">
     <div class="topbar__brand">
       <div class="topbar__logo">BI<span>VG</span></div>
-      <a href="index.html" class="topbar__back">← bivg.es</a>
+      <a href="index.html" class="topbar__back" aria-label="Volver a la portada de bivg.es">← bivg.es</a>
     </div>
     <div class="topbar__center">
-      <div class="topbar__title">Operations Control Tower</div>
+      <h1 class="topbar__title">Operations Control Tower</h1>
       <div class="topbar__subtitle">Datos de muestra &middot; 2024 &middot; Turno actual</div>
     </div>
-    <div class="topbar__controls">
+    <div class="topbar__controls" role="group" aria-label="Filtros del informe">
       <button class="filter-pill active">Hoy</button>
       <button class="filter-pill">Esta semana</button>
       <button class="filter-pill">Mes</button>
@@ -65,7 +78,7 @@
   </div>
 </header>
 
-<main class="dash-body">
+<main class="dash-body" id="main-content" tabindex="-1">
 
   <!-- KPI ROW (5) -->
   <div class="kpi-row kpi-row--5">
@@ -73,31 +86,31 @@
       <div class="kpi-card__label">OEE Global</div>
       <div class="kpi-card__value">87.3%</div>
       <div class="kpi-card__delta up">↑ +2.1pp vs semana</div>
-      <canvas class="kpi-card__sparkline" id="spk1"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk1"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--green);">
       <div class="kpi-card__label">On-time delivery</div>
       <div class="kpi-card__value">96.1%</div>
       <div class="kpi-card__delta up">↑ +1.3pp</div>
-      <canvas class="kpi-card__sparkline" id="spk2"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk2"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--blue);">
       <div class="kpi-card__label">Pedidos hoy</div>
       <div class="kpi-card__value">1,247</div>
       <div class="kpi-card__delta up">↑ +8.2% vs ayer</div>
-      <canvas class="kpi-card__sparkline" id="spk3"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk3"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--red);">
       <div class="kpi-card__label">Tasa defectos</div>
       <div class="kpi-card__value">1.8%</div>
       <div class="kpi-card__delta up">↓ −0.4pp mejoría</div>
-      <canvas class="kpi-card__sparkline" id="spk4"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk4"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--green);">
       <div class="kpi-card__label">Lead time medio</div>
       <div class="kpi-card__value">2.3d</div>
       <div class="kpi-card__delta up">↓ −0.2d mejoría</div>
-      <canvas class="kpi-card__sparkline" id="spk5"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk5"></canvas>
     </div>
   </div>
 
@@ -106,13 +119,13 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">OEE Global</div>
+          <h2 class="chart-card__title">OEE Global</h2>
           <div class="chart-card__sub">Disponibilidad &times; Rendimiento &times; Calidad</div>
         </div>
         <span class="chart-badge">87.3%</span>
       </div>
       <div class="oee-gauge-wrap">
-        <svg class="oee-gauge-svg" viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg">
+        <svg class="oee-gauge-svg" viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Indicador OEE global del 87,3 por ciento; disponibilidad 91,2 por ciento, rendimiento 93,8 por ciento y calidad 98,2 por ciento">
           <defs>
             <linearGradient id="oeeGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stop-color="#FB923C"/>
@@ -131,8 +144,8 @@
           <text x="130" y="108" text-anchor="middle" font-family="Syne, sans-serif" font-size="32" font-weight="800" fill="#FAFAFA">87.3%</text>
           <text x="130" y="126" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA" letter-spacing="2">OEE GLOBAL</text>
           <!-- Min/Max labels -->
-          <text x="14"  y="148" font-family="JetBrains Mono, monospace" font-size="8" fill="#52525B">0%</text>
-          <text x="235" y="148" font-family="JetBrains Mono, monospace" font-size="8" fill="#52525B">100%</text>
+          <text x="14"  y="148" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B8B94">0%</text>
+          <text x="235" y="148" font-family="JetBrains Mono, monospace" font-size="8" fill="#8B8B94">100%</text>
         </svg>
         <div class="oee-sub-metrics">
           <div class="oee-sub-item">
@@ -153,12 +166,12 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Producción diaria — Último mes</div>
+          <h2 class="chart-card__title">Producción diaria — Último mes</h2>
           <div class="chart-card__sub">Real vs Objetivo &middot; Unidades producidas</div>
         </div>
         <span class="chart-badge">20 días lab.</span>
       </div>
-      <canvas id="prodChart" height="120"></canvas>
+      <canvas id="prodChart" height="120" role="img" aria-label="Gráfico de barras con la producción diaria real frente al objetivo durante el último mes, en unidades"></canvas>
     </div>
   </div>
 
@@ -167,11 +180,12 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Estado de líneas de producción</div>
+          <h2 class="chart-card__title">Estado de líneas de producción</h2>
           <div class="chart-card__sub">Turno actual</div>
         </div>
       </div>
       <table class="dash-table">
+        <caption class="visually-hidden">Estado del turno actual por línea de producción: OEE, unidades por hora y estado</caption>
         <thead>
           <tr>
             <th>Línea</th>
@@ -186,11 +200,11 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Pedidos 2024 — Mensual</div>
+          <h2 class="chart-card__title">Pedidos 2024 — Mensual</h2>
           <div class="chart-card__sub">Recibidos / Procesados / Entregados</div>
         </div>
       </div>
-      <canvas id="ordersChart" height="120"></canvas>
+      <canvas id="ordersChart" height="120" role="img" aria-label="Gráfico de líneas con los pedidos mensuales de 2024 recibidos, procesados y entregados"></canvas>
     </div>
   </div>
 
@@ -199,28 +213,29 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Heatmap Lead Time</div>
+          <h2 class="chart-card__title">Heatmap Lead Time</h2>
           <div class="chart-card__sub">5 días × 8 semanas &middot; Días hábiles &middot; Verde = rapido, Rojo = lento</div>
         </div>
       </div>
-      <div id="heatmapContainer"></div>
+      <div id="heatmapContainer" role="img" aria-label="Mapa de calor del lead time de 8 semanas por día laborable; el verde indica tiempos rápidos y el rojo, lentos"></div>
     </div>
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Pareto de defectos</div>
+          <h2 class="chart-card__title">Pareto de defectos</h2>
           <div class="chart-card__sub">Causas principales &middot; % acumulado</div>
         </div>
         <span class="chart-badge">Pareto 80/20</span>
       </div>
-      <canvas id="paretoChart" height="130"></canvas>
+      <canvas id="paretoChart" height="130" role="img" aria-label="Diagrama de Pareto con las principales causas de defectos y su porcentaje acumulado"></canvas>
     </div>
   </div>
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <script>
+document.addEventListener('DOMContentLoaded', function () {
 Chart.defaults.color = '#A1A1AA';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
 Chart.defaults.font.size = 11;
@@ -366,12 +381,13 @@ new Chart(document.getElementById('paretoChart'), {
     plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:14}},tooltip:{...T,mode:'index',intersect:false}},
     scales:{
       x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'}},
-      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},title:{display:true,text:'Núm. defectos',color:'#52525B'}},
+      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},title:{display:true,text:'Núm. defectos',color:'#8B8B94'}},
       y2:{position:'right',grid:{display:false},ticks:{color:'#EF4444',callback:v=>v+'%'},
           title:{display:true,text:'% acumulado',color:'#EF4444'},min:0,max:100}
     }}
 });
+});
 </script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>

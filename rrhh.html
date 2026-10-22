@@ -5,12 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HR Analytics Dashboard — BIVG</title>
   <meta name="description" content="HR Analytics Dashboard — demo interactiva de indicadores de RRHH con Chart.js. Portfolio BIVG." />
+  <link rel="canonical" href="https://bivg.es/rrhh.html" />
   <meta property="og:title" content="HR Analytics Dashboard — BIVG" />
   <meta property="og:description" content="Demo interactiva de indicadores de RRHH con Chart.js." />
+  <meta property="og:url" content="https://bivg.es/rrhh.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BIVG" />
+  <meta property="og:locale" content="es_ES" />
   <meta property="og:image" content="https://bivg.es/assets/img/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HR Analytics Dashboard — BIVG" />
+  <meta name="twitter:description" content="Demo interactiva de indicadores de RRHH con Chart.js." />
+  <meta name="twitter:image" content="https://bivg.es/assets/img/og-card.png" />
   <meta name="theme-color" content="#09090B" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -25,25 +37,26 @@
     .pyramid-label { width: 40px; text-align: center; color: var(--text-muted); }
     .pyramid-bar-wrap { flex: 1; display: flex; gap: 2px; }
     .pyramid-bar-l { height: 18px; border-radius: 3px 0 0 3px; background: #F97316; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px; font-size: 0.6rem; color: #09090B; font-weight: 600; }
-    .pyramid-bar-r { height: 18px; border-radius: 0 3px 3px 0; background: #3B82F6; display: flex; align-items: center; padding-left: 4px; font-size: 0.6rem; color: #fff; font-weight: 600; }
+    .pyramid-bar-r { height: 18px; border-radius: 0 3px 3px 0; background: #3B82F6; display: flex; align-items: center; padding-left: 4px; font-size: 0.6rem; color: #09090B; font-weight: 600; }
     .pyramid-center { width: 2px; background: var(--border-subtle); }
     .dept-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
   </style>
 </head>
 <body class="dash-page">
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar__inner">
     <div class="topbar__brand">
       <div class="topbar__logo">BI<span>VG</span></div>
-      <a href="index.html" class="topbar__back">← bivg.es</a>
+      <a href="index.html" class="topbar__back" aria-label="Volver a la portada de bivg.es">← bivg.es</a>
     </div>
     <div class="topbar__center">
-      <div class="topbar__title">HR Analytics Dashboard</div>
+      <h1 class="topbar__title">HR Analytics Dashboard</h1>
       <div class="topbar__subtitle">Datos de muestra &middot; 2024 &middot; Cierre diciembre</div>
     </div>
-    <div class="topbar__controls">
+    <div class="topbar__controls" role="group" aria-label="Filtros del informe">
       <button class="filter-pill active">2024</button>
       <button class="filter-pill">Todos los dept.</button>
       <button class="filter-pill">Activos</button>
@@ -53,7 +66,7 @@
   </div>
 </header>
 
-<main class="dash-body">
+<main class="dash-body" id="main-content" tabindex="-1">
 
   <!-- KPI ROW -->
   <div class="kpi-row kpi-row--4">
@@ -61,25 +74,25 @@
       <div class="kpi-card__label">Plantilla total</div>
       <div class="kpi-card__value">247</div>
       <div class="kpi-card__delta up">↑ +12 vs dic 2023</div>
-      <canvas class="kpi-card__sparkline" id="spk1"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk1"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--green);">
       <div class="kpi-card__label">Satisfacción media</div>
       <div class="kpi-card__value">7.8<small style="font-size:1rem">/10</small></div>
       <div class="kpi-card__delta up">↑ +0.4 vs 2023</div>
-      <canvas class="kpi-card__sparkline" id="spk2"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk2"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--red);">
       <div class="kpi-card__label">Rotación anual</div>
       <div class="kpi-card__value">8.3%</div>
       <div class="kpi-card__delta up">↓ −1.2pp mejoría</div>
-      <canvas class="kpi-card__sparkline" id="spk3"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk3"></canvas>
     </div>
     <div class="kpi-card" style="--kpi-color: #F59E0B;">
       <div class="kpi-card__label">Absentismo</div>
       <div class="kpi-card__value">3.1%</div>
       <div class="kpi-card__delta down">→ Estable</div>
-      <canvas class="kpi-card__sparkline" id="spk4"></canvas>
+      <canvas class="kpi-card__sparkline" aria-hidden="true" id="spk4"></canvas>
     </div>
   </div>
 
@@ -88,21 +101,21 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Movimientos de plantilla 2024</div>
+          <h2 class="chart-card__title">Movimientos de plantilla 2024</h2>
           <div class="chart-card__sub">Altas y bajas mensuales &middot; Acumulado como línea</div>
         </div>
         <span class="chart-badge">Dual axis</span>
       </div>
-      <canvas id="movChart" height="95"></canvas>
+      <canvas id="movChart" height="95" role="img" aria-label="Gráfico combinado de altas y bajas mensuales de plantilla en 2024, con el total acumulado como línea"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Distribución departamental</div>
+          <h2 class="chart-card__title">Distribución departamental</h2>
           <div class="chart-card__sub">Headcount actual</div>
         </div>
       </div>
-      <canvas id="deptDonut" height="200"></canvas>
+      <canvas id="deptDonut" height="200" role="img" aria-label="Gráfico de anillo con la distribución de la plantilla por departamento: Operaciones, Comercial, IT, Finanzas, RRHH y Dirección"></canvas>
     </div>
   </div>
 
@@ -111,11 +124,12 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Indicadores por departamento</div>
+          <h2 class="chart-card__title">Indicadores por departamento</h2>
           <div class="chart-card__sub">Rotación y absentismo 2024</div>
         </div>
       </div>
       <table class="dash-table">
+        <caption class="visually-hidden">Empleados, rotación y absentismo por departamento en 2024</caption>
         <thead>
           <tr>
             <th>Departamento</th>
@@ -130,7 +144,7 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Indicadores clave</div>
+          <h2 class="chart-card__title">Indicadores clave</h2>
           <div class="chart-card__sub">vs benchmark sector</div>
         </div>
       </div>
@@ -139,8 +153,8 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Pirámide de edad</div>
-          <div class="chart-card__sub"><span style="color:#F97316">&#9632;</span> Mujeres &nbsp;<span style="color:#3B82F6">&#9632;</span> Hombres</div>
+          <h2 class="chart-card__title">Pirámide de edad</h2>
+          <div class="chart-card__sub"><span style="color:#F97316" aria-hidden="true">&#9632;</span> Mujeres &nbsp;<span style="color:#3B82F6" aria-hidden="true">&#9632;</span> Hombres</div>
         </div>
       </div>
       <div class="pyramid-wrap" id="pyramidWrap"></div>
@@ -152,17 +166,17 @@
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Evolución rotación y absentismo</div>
+          <h2 class="chart-card__title">Evolución rotación y absentismo</h2>
           <div class="chart-card__sub">Mensual 2024 &middot; Con objetivos</div>
         </div>
         <span class="chart-badge">Dual KPI</span>
       </div>
-      <canvas id="dualLine" height="90"></canvas>
+      <canvas id="dualLine" height="90" role="img" aria-label="Gráfico de líneas con la evolución mensual de la rotación y el absentismo en 2024 frente a sus objetivos"></canvas>
     </div>
     <div class="chart-card">
       <div class="chart-card__header">
         <div>
-          <div class="chart-card__title">Objetivos anuales</div>
+          <h2 class="chart-card__title">Objetivos anuales</h2>
           <div class="chart-card__sub">Progreso 2024</div>
         </div>
       </div>
@@ -172,8 +186,9 @@
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 <script>
+document.addEventListener('DOMContentLoaded', function () {
 Chart.defaults.color = '#A1A1AA';
 Chart.defaults.font.family = "'DM Sans', sans-serif";
 Chart.defaults.font.size = 11;
@@ -215,7 +230,7 @@ new Chart(document.getElementById('movChart'), {
     tooltip:{...tooltipDefaults,mode:'index',intersect:false}},
     scales:{
       x:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'}},
-      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},title:{display:true,text:'Movimientos',color:'#52525B'}},
+      y:{grid:{color:'#27272A'},ticks:{color:'#A1A1AA'},title:{display:true,text:'Movimientos',color:'#8B8B94'}},
       y2:{position:'right',grid:{display:false},ticks:{color:'#F97316'},title:{display:true,text:'Total plantilla',color:'#F97316'}}
     }
   }
@@ -346,7 +361,8 @@ goals.forEach(g => {
     </div>
   </div>`;
 });
+});
 </script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
