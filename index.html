@@ -38,6 +38,7 @@
     <ul class="nav__links">
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#stack">Stack</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -49,6 +50,7 @@
   <div class="nav__mobile" id="mobile-menu" role="navigation" aria-label="Navegación móvil">
     <a href="#sobre-mi">Sobre mí</a>
     <a href="#portfolio">Portfolio</a>
+    <a href="#proyectos">Proyectos</a>
     <a href="#stack">Stack</a>
     <a href="#contacto">Contacto</a>
   </div>
@@ -381,6 +383,76 @@
       </a>
 
     </div><!-- /portfolio__grid -->
+  </div>
+</section>
+
+<!-- ── PROYECTOS REALES ──────────────────────────────────────── -->
+<section class="section" id="proyectos">
+  <div class="container">
+    <span class="section-label">Proyectos reales</span>
+    <h2 class="section-title">Sistemas en producción</h2>
+    <p class="section-sub">Además de los informes de muestra, diseño, construyo y mantengo aplicaciones de datos que se usan a diario. Se cuentan sin datos privados.</p>
+
+    <div class="cases__grid">
+      <article class="case-card reveal">
+        <span class="case-card__status">En producción</span>
+        <h3 class="case-card__title">Plataforma de finanzas y compras</h3>
+        <dl class="case-card__body">
+          <dt>Reto</dt>
+          <dd>Gastos de una familia repartidos entre bancos, tickets y suscripciones, sin una vista única.</dd>
+          <dt>Solución</dt>
+          <dd>Aplicación web con importación de extractos bancarios, lectura de tickets con IA (de la foto a productos y precios), seguimiento diario de precios de supermercado y avisos al móvil.</dd>
+          <dt>Operación</dt>
+          <dd>Servidor propio con contenedores, tareas programadas y copias de seguridad cifradas fuera del servidor.</dd>
+        </dl>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Docker</span>
+          <span class="tag">IA (Claude API)</span>
+        </div>
+      </article>
+
+      <article class="case-card reveal">
+        <span class="case-card__status">En producción</span>
+        <h3 class="case-card__title">Hogar conectado con analítica</h3>
+        <dl class="case-card__body">
+          <dt>Reto</dt>
+          <dd>Calefacción, aire acondicionado, cámaras y alarmas de varios fabricantes, cada uno con su app.</dd>
+          <dt>Solución</dt>
+          <dd>Plataforma domótica en un servidor de casa: climatización por zonas y franjas horarias, cámaras con detección local, automatizaciones y avisos agrupados.</dd>
+          <dt>Datos</dt>
+          <dd>Histórico de temperaturas y consumo para ajustar la climatización con datos y no a ojo.</dd>
+        </dl>
+        <div class="tags">
+          <span class="tag">Home Assistant</span>
+          <span class="tag">MQTT</span>
+          <span class="tag">n8n</span>
+          <span class="tag">Frigate</span>
+          <span class="tag">Tailscale</span>
+        </div>
+      </article>
+
+      <article class="case-card reveal">
+        <span class="case-card__status">En producción</span>
+        <h3 class="case-card__title">Contenidos con IA para un negocio local</h3>
+        <dl class="case-card__body">
+          <dt>Reto</dt>
+          <dd>Un salón de peluquería con buen trabajo diario y poco tiempo para contarlo en redes.</dd>
+          <dt>Solución</dt>
+          <dd>Aplicación que convierte cada trabajo real en un plan de publicaciones para Instagram, con textos asistidos por IA y aprobación siempre humana.</dd>
+          <dt>Medición</dt>
+          <dd>Resultados de cada publicación desde la API de Instagram (alcance, guardados, seguidores) que alimentan la propuesta de la semana siguiente.</dd>
+        </dl>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">Prisma</span>
+          <span class="tag">Instagram API</span>
+          <span class="tag">IA (Claude API)</span>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
