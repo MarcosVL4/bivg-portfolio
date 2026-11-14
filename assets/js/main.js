@@ -86,65 +86,6 @@
     });
   });
 
-  /* ── Formulario de contacto ─────────────────────────────────── */
-  // Sin JS, el formulario va solo a gastos.bivg.es/api/contacto-web y vuelve
-  // con ?contacto=ok|error. Con JS se manda por fetch y se queda aquí.
-  const form = document.getElementById('form-contacto');
-  if (form) {
-    const estado = form.querySelector('.form-contacto__estado');
-    const boton = form.querySelector('button[type="submit"]');
-    const t = form.querySelector('input[name="t"]');
-    if (t) t.value = String(Date.now());
-
-    const decir = (texto, tipo) => {
-      estado.textContent = texto;
-      estado.className = 'form-contacto__estado' + (tipo ? ' ' + tipo : '');
-    };
-
-    const vuelta = new URLSearchParams(location.search).get('contacto');
-    if (vuelta === 'ok') decir('Mensaje enviado. Te contesto pronto.', 'ok');
-    else if (vuelta === 'error') decir('No se ha podido enviar. Prueba otra vez o escríbeme al email.', 'error');
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      let primero = null;
-      form.querySelectorAll('input[required], textarea[required]').forEach((campo) => {
-        const malo = !campo.checkValidity();
-        campo.setAttribute('aria-invalid', String(malo));
-        if (malo && !primero) primero = campo;
-      });
-      if (primero) {
-        decir(primero.type === 'checkbox'
-          ? 'Marca la casilla para poder contestarte.'
-          : 'Revisa los campos marcados en rojo.', 'error');
-        primero.focus();
-        return;
-      }
-
-      boton.disabled = true;
-      decir('Enviando…');
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new URLSearchParams(new FormData(form)),
-          headers: { Accept: 'application/json' },
-        });
-        const datos = await res.json().catch(() => ({}));
-        if (res.ok && datos.ok) {
-          form.reset();
-          if (t) t.value = String(Date.now());
-          decir('Mensaje enviado. Te contesto pronto.', 'ok');
-        } else {
-          decir(datos.error || 'No se ha podido enviar. Prueba otra vez o escríbeme al email.', 'error');
-        }
-      } catch {
-        decir('No se ha podido enviar. Prueba otra vez o escríbeme al email.', 'error');
-      } finally {
-        boton.disabled = false;
-      }
-    });
-  }
-
   /* ── Footer year ────────────────────────────────────────────── */
   const yearEl = document.getElementById('year');
   if (yearEl) {

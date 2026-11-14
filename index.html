@@ -3,669 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BIVG — Business Intelligence &amp; Data Analytics</title>
-  <meta name="description" content="Portfolio de Marcos — Especialista en Business Intelligence. Power BI, DAX avanzado, SQL Server y ETL; además aplicaciones a medida, administración de sistemas y automatización con IA. Microsoft Certified PL-300." />
+  <title>Marcos Vallespí, consultor de Business Intelligence</title>
+  <meta name="description" content="Consultor de Business Intelligence certificado en Power BI (PL-300), con más de siete años de experiencia. También automatizo procesos y hago aplicaciones a medida." />
   <link rel="canonical" href="https://bivg.es/" />
-  <meta property="og:title" content="BIVG — Business Intelligence Portfolio" />
-  <meta property="og:description" content="Datos que cuentan historias. Decisiones que generan valor." />
+  <link rel="alternate" hreflang="es" href="https://bivg.es/" />
+  <link rel="alternate" hreflang="en" href="https://bivg.es/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://bivg.es/" />
+  <meta property="og:title" content="Marcos Vallespí, consultor de Business Intelligence" />
+  <meta property="og:description" content="Del dato disperso al informe que se usa." />
   <meta property="og:url" content="https://bivg.es/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="BIVG" />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:locale:alternate" content="en_GB" />
   <meta property="og:image" content="https://bivg.es/assets/img/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="BIVG — Business Intelligence Portfolio" />
-  <meta name="twitter:description" content="Datos que cuentan historias. Decisiones que generan valor." />
-  <meta name="twitter:image" content="https://bivg.es/assets/img/og-card.png" />
-  <meta name="twitter:image:alt" content="BIVG — Business Intelligence &amp; Data Analytics" />
-  <meta name="theme-color" content="#09090B" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F97316'/%3E%3Ctext x='50' y='70' font-size='52' font-weight='800' text-anchor='middle' font-family='Arial, sans-serif' fill='%2309090B'%3EBI%3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#EEF2F1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#172126" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='10' fill='%23172126'/%3E%3Crect x='16' y='60' width='14' height='24' fill='%23F2C811'/%3E%3Crect x='36' y='42' width='14' height='42' fill='%23F2C811'/%3E%3Crect x='56' y='28' width='14' height='56' fill='%23F2C811'/%3E%3Crect x='76' y='16' width='8' height='68' fill='%23EEF2F1'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/inicio.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Marcos Vallespí","url":"https://bivg.es/","jobTitle":"Consultor de Business Intelligence","sameAs":["https://es.linkedin.com/in/marcos-vallespi"],"hasCredential":{"@type":"EducationalOccupationalCredential","name":"Microsoft Certified: Power BI Data Analyst Associate (PL-300)"}}
+  </script>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Saltar al contenido</a>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
-<!-- ── NAV ─────────────────────────────────────────────────── -->
-<nav class="nav" id="main-nav" aria-label="Navegación principal">
-  <div class="nav__inner">
-    <a href="index.html" class="nav__logo" aria-label="BIVG, ir al inicio">BI<span>VG</span></a>
-    <ul class="nav__links">
-      <li><a href="#sobre-mi">Sobre mí</a></li>
-      <li><a href="#aportar">Qué aporto</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-    </ul>
-    <a href="#contacto" class="nav__cta">Contactar</a>
-    <button class="nav__burger" type="button" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="nav__mobile" id="mobile-menu" role="navigation" aria-label="Navegación móvil">
-    <a href="#sobre-mi">Sobre mí</a>
-    <a href="#aportar">Qué aporto</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#stack">Stack</a>
+<header class="envoltura cabecera">
+  <a class="marca" href="./">BIVG</a>
+  <nav aria-label="Principal">
+    <a class="secundario" href="#que-hago">Qué hago</a>
+    <a class="secundario" href="#demostraciones">Demostraciones</a>
     <a href="#contacto">Contacto</a>
-  </div>
-</nav>
+    <a class="idioma" href="en/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
 
-<main id="main-content" tabindex="-1">
+<main id="contenido">
 
-<!-- ── HERO ─────────────────────────────────────────────────── -->
-<section class="hero">
-  <div class="hero__grid-bg"></div>
-  <div class="hero__glow"></div>
-  <div class="container">
-    <div class="hero__inner">
-      <div class="hero__content">
-        <div class="hero__badge">
-          <span class="hero__badge-dot" aria-hidden="true"></span>
-          Microsoft Certified &middot; PL-300 &middot; Power BI Data Analyst
-        </div>
-        <h1 class="hero__h1">
-          Datos que cuentan<br>
-          <span class="gradient">historias.</span><br>
-          Decisiones que<br>generan valor.
-        </h1>
-        <p class="hero__sub">
-          Especialista en Business Intelligence con dominio end-to-end: desde la ingesta de datos en SQL Server hasta el informe final en Power BI. Y además desarrollo aplicaciones a medida, administro servidores y automatizo procesos con IA.
-        </p>
-        <div class="hero__actions">
-          <a href="#portfolio" class="btn-primary">Ver portfolio</a>
-          <a href="#contacto" class="btn-secondary">Contactar</a>
-        </div>
-      </div>
-      <div class="hero__stats">
-        <div class="hero__stat reveal-right">
-          <span class="hero__stat-value">6+</span>
-          <span class="hero__stat-label">Años de experiencia</span>
-        </div>
-        <div class="hero__stat reveal-right" style="transition-delay:.1s">
-          <span class="hero__stat-value">50+</span>
-          <span class="hero__stat-label">Informes publicados</span>
-        </div>
-        <div class="hero__stat reveal-right" style="transition-delay:.2s">
-          <span class="hero__stat-value">PL-300</span>
-          <span class="hero__stat-label">Certificación Microsoft</span>
-        </div>
+  <section class="envoltura portada" aria-labelledby="titular">
+    <div>
+      <p class="portada__quien">Marcos Vallespí, consultor de Business Intelligence</p>
+      <h1 id="titular">Del dato disperso al informe que se usa.</h1>
+      <p class="portada__texto">
+        Llevo <strong>más de siete años</strong> modelando datos y publicando informes en Power BI.
+        Cuando hace falta, también construyo lo que hay alrededor: la aplicación que recoge los datos,
+        la automatización que los limpia y el servidor donde todo funciona.
+      </p>
+      <a class="credencial" href="https://learn.microsoft.com/api/credentials/share/es-es/Marcos-6363/B257FB48FBDECB53?sharingId=D86A6103BB93D4D9" target="_blank" rel="noopener">
+        <span class="credencial__sello" aria-hidden="true">PL-300</span>
+        <span>Microsoft Certified: Power BI Data Analyst Associate <span>Ver la credencial en Microsoft Learn</span></span>
+      </a>
+      <div class="acciones">
+        <a class="boton boton--lleno" href="#contacto">Escríbeme</a>
+        <a class="boton boton--vacio" href="https://es.linkedin.com/in/marcos-vallespi" target="_blank" rel="noopener">Ver LinkedIn</a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ── CERT BANNER ──────────────────────────────────────────── -->
-<div class="container" style="padding-bottom: 64px; position:relative; z-index:1;">
-  <div class="cert-banner reveal">
-    <span class="cert-banner__icon" aria-hidden="true">🏆</span>
-    <div class="cert-banner__body">
-      <div class="cert-banner__title">Microsoft Certified: Power BI Data Analyst Associate</div>
-      <div class="cert-banner__desc">Certificación oficial de Microsoft que acredita competencia avanzada en modelado de datos, DAX, Power Query y publicación en Power BI Service.</div>
+    <figure class="modelo" aria-label="Lo que hago, dibujado como un modelo en estrella de Power BI. Cada tabla lleva a su apartado.">
+      <svg class="modelo__lineas" aria-hidden="true" focusable="false">
+        <line data-a="arr" pathLength="100" />
+        <line data-a="der" pathLength="100" />
+        <line data-a="aba" pathLength="100" />
+        <line data-a="izq" pathLength="100" />
+      </svg>
+      <div class="tabla tabla--hechos" aria-hidden="true">
+        <div class="tabla__nombre">Proyecto <small>hechos</small></div>
+        <ul><li>datos</li><li>informe</li><li>proceso</li><li>aplicación</li></ul>
+      </div>
+      <a class="tabla" data-dim="arr" href="#informes">
+        <span class="tabla__nombre">Informes <small>1</small></span>
+        <ul><li>Power BI</li><li>DAX</li><li>SQL Server</li></ul>
+      </a>
+      <a class="tabla" data-dim="der" href="#automatizacion">
+        <span class="tabla__nombre">Automatización <small>1</small></span>
+        <ul><li>n8n</li><li>Python</li><li>IA</li></ul>
+      </a>
+      <a class="tabla" data-dim="aba" href="#aplicaciones">
+        <span class="tabla__nombre">Aplicaciones <small>1</small></span>
+        <ul><li>Next.js</li><li>Rust</li><li>PostgreSQL</li></ul>
+      </a>
+      <a class="tabla" data-dim="izq" href="#produccion">
+        <span class="tabla__nombre">Producción <small>1</small></span>
+        <ul><li>Linux</li><li>Docker</li><li>Copias</li></ul>
+      </a>
+    </figure>
+  </section>
+
+  <section class="envoltura seccion" id="que-hago" aria-labelledby="t-que-hago">
+    <h2 id="t-que-hago">Qué hago</h2>
+    <div>
+      <p class="seccion__intro">El centro es el informe. Lo demás existe para que los datos lleguen a él limpios, a tiempo y sin que nadie tenga que copiarlos a mano.</p>
+      <dl class="areas">
+        <div class="area" id="informes">
+          <dt>Informes y modelos de datos</dt>
+          <dd>Modelos en estrella, medidas DAX y cargas desde SQL Server para que los números cuadren y el informe se abra rápido. Seguridad por filas cuando cada persona solo debe ver lo suyo.
+            <p class="herramientas">Power BI, DAX, Power Query, SQL Server, T-SQL, SSIS.</p></dd>
+        </div>
+        <div class="area" id="automatizacion">
+          <dt>Automatización de procesos</dt>
+          <dd>Facturas, tickets y tareas repetitivas que se procesan solas. La IA lee y clasifica donde aporta, y una persona revisa antes de que se guarde nada.
+            <p class="herramientas">n8n, Python, PowerShell, APIs REST, modelos de IA.</p></dd>
+        </div>
+        <div class="area" id="aplicaciones">
+          <dt>Aplicaciones a medida</dt>
+          <dd>Herramientas internas que sustituyen al Excel compartido: con usuarios y permisos, que se usan desde el móvil y que guardan los datos listos para analizarlos.
+            <p class="herramientas">Next.js, TypeScript, React, Rust con Axum, PostgreSQL, SQLite.</p></dd>
+        </div>
+        <div class="area" id="produccion">
+          <dt>Puesta en producción</dt>
+          <dd>Alojar todo lo anterior y que siga funcionando: contenedores, dominios y certificados, acceso con inicio de sesión único, copias cifradas fuera del servidor y avisos si algo cae.
+            <p class="herramientas">Linux, Windows Server, Docker, Traefik, Cloudflare, Proxmox.</p></dd>
+        </div>
+      </dl>
     </div>
-    <a class="cert-badge" href="https://learn.microsoft.com/api/credentials/share/es-es/Marcos-6363/B257FB48FBDECB53?sharingId=D86A6103BB93D4D9" target="_blank" rel="noopener" aria-label="Ver la credencial PL-300 verificada en Microsoft Learn (se abre en una pestaña nueva)" title="Ver mi credencial verificada en Microsoft Learn">PL-300 ↗</a>
-  </div>
-</div>
+  </section>
 
-<!-- ── SOBRE MI ──────────────────────────────────────────────── -->
-<section class="section" id="sobre-mi">
-  <div class="container">
-    <span class="section-label">Sobre mí</span>
-    <h2 class="section-title">BI Developer &amp; Data Engineer</h2>
-    <p class="section-sub">Transformo datos complejos en decisiones claras. Trabajo en todo el pipeline: modelado, ETL, automatización e informes ejecutivos.</p>
-
-    <div class="about__grid">
-      <div class="about-card reveal">
-        <span class="about-card__icon" aria-hidden="true">📊</span>
-        <h3 class="about-card__title">Power BI &amp; DAX Avanzado</h3>
-        <p class="about-card__desc">Modelos de datos estrella/copo de nieve, medidas DAX de alta complejidad, Row-Level Security y optimización de rendimiento.</p>
-        <div class="tags">
-          <span class="tag">DAX</span>
-          <span class="tag">Power Query</span>
-          <span class="tag">Dataflows</span>
-          <span class="tag">Incremental Refresh</span>
-        </div>
-      </div>
-      <div class="about-card reveal">
-        <span class="about-card__icon" aria-hidden="true">🗄️</span>
-        <h3 class="about-card__title">SQL Server &amp; Administración</h3>
-        <p class="about-card__desc">Diseño y administración de bases de datos relacionales, stored procedures, índices, jobs de mantenimiento y migraciones.</p>
-        <div class="tags">
-          <span class="tag">SQL Server 2019</span>
-          <span class="tag">T-SQL</span>
-          <span class="tag">SSIS</span>
-          <span class="tag">PowerShell</span>
-        </div>
-      </div>
-      <div class="about-card reveal">
-        <span class="about-card__icon" aria-hidden="true">🔗</span>
-        <h3 class="about-card__title">Integración de Datos</h3>
-        <p class="about-card__desc">Pipelines ETL/ELT robustos, conexión a APIs REST, transformación de ficheros Excel/CSV y gestión de infraestructura virtualizada.</p>
-        <div class="tags">
-          <span class="tag">ETL</span>
-          <span class="tag">REST APIs</span>
-          <span class="tag">Excel/CSV</span>
-          <span class="tag">Proxmox</span>
-        </div>
-      </div>
-      <div class="about-card reveal">
-        <span class="about-card__icon" aria-hidden="true">⚙️</span>
-        <h3 class="about-card__title">Automatización &amp; DevOps BI</h3>
-        <p class="about-card__desc">Control de versiones de informes Power BI, despliegue en pipelines de Fabric, gestión de workspaces y API REST de Power BI.</p>
-        <div class="tags">
-          <span class="tag">Git</span>
-          <span class="tag">Fabric</span>
-          <span class="tag">Power BI Service</span>
-          <span class="tag">REST API</span>
-        </div>
-      </div>
+  <section class="envoltura seccion" id="demostraciones" aria-labelledby="t-demos">
+    <h2 id="t-demos">Informes de demostración</h2>
+    <div>
+      <p class="seccion__intro">Cuatro informes hechos con datos ficticios para enseñar cómo planteo un cuadro de mando. Se pueden abrir y filtrar.</p>
+      <ul class="demos">
+        <li class="demo"><a href="ventas.html"><strong>Ventas</strong><span>Evolución mensual frente al año anterior, productos más vendidos y reparto por canal y zona.</span><em>Abrir informe</em></a></li>
+        <li class="demo"><a href="rrhh.html"><strong>Personas</strong><span>Plantilla, rotación, absentismo y satisfacción por departamento.</span><em>Abrir informe</em></a></li>
+        <li class="demo"><a href="financiero.html"><strong>Finanzas</strong><span>Cuenta de resultados en cascada, presupuesto frente a real y flujo de caja.</span><em>Abrir informe</em></a></li>
+        <li class="demo"><a href="operaciones.html"><strong>Operaciones</strong><span>Eficiencia de las líneas, producción frente a objetivo y defectos por causa.</span><em>Abrir informe</em></a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── QUÉ PUEDO APORTAR ──────────────────────────────────────── -->
-<section class="section section--secondary" id="aportar">
-  <div class="container">
-    <span class="section-label">Más allá del BI</span>
-    <h2 class="section-title">Qué puedo aportar</h2>
-    <p class="section-sub">Los datos son mi base, pero el trabajo no acaba en el informe. Puedo encargarme de la aplicación que los recoge, del servidor donde corre y de la automatización que ahorra horas cada semana.</p>
-
-    <div class="aportar__grid">
-      <article class="aportar-card reveal">
-        <span class="aportar-card__num" aria-hidden="true">01</span>
-        <h3 class="aportar-card__title">Aplicaciones a medida</h3>
-        <p class="aportar-card__desc">Aplicaciones web que se instalan en el móvil como una app: gestión interna, reservas, inventario, paneles para clientes. Con login, roles, copias de seguridad y un diseño cuidado.</p>
-        <div class="tags">
-          <span class="tag">Next.js</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">PWA</span>
+  <section class="envoltura seccion" id="contacto" aria-labelledby="t-contacto">
+    <h2 id="t-contacto">Contacto</h2>
+    <div>
+      <p class="seccion__intro">Para un proyecto, una duda sobre Power BI o simplemente para conocernos.</p>
+      <!-- Lo recibe gastos.bivg.es/api/contacto-web y llega a Marcos por
+           Telegram. Funciona también sin JavaScript (vuelve con ?contacto=ok). -->
+      <form class="formulario" id="formulario" action="https://gastos.bivg.es/api/contacto-web" method="post" novalidate>
+        <div class="formulario__fila">
+          <label class="campo"><span>Nombre</span>
+            <input type="text" name="nombre" autocomplete="name" required maxlength="100" /></label>
+          <label class="campo"><span>Email</span>
+            <input type="email" name="email" autocomplete="email" required maxlength="200" /></label>
         </div>
-      </article>
-      <article class="aportar-card reveal">
-        <span class="aportar-card__num" aria-hidden="true">02</span>
-        <h3 class="aportar-card__title">Administración de sistemas</h3>
-        <p class="aportar-card__desc">Servidores Linux y Windows, contenedores Docker, dominios, certificados y proxy inverso. Puesta en marcha, mantenimiento, monitorización y avisos cuando algo cae.</p>
-        <div class="tags">
-          <span class="tag">Linux</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Traefik</span>
-          <span class="tag">Windows Server</span>
+        <label class="campo"><span>Tema <small>(opcional)</small></span>
+          <select name="tema">
+            <option value="">Sin elegir</option>
+            <option>Informes y Power BI</option>
+            <option>Automatización</option>
+            <option>Una aplicación</option>
+            <option>Servidores y sistemas</option>
+            <option>Otra cosa</option>
+          </select></label>
+        <label class="campo"><span>Mensaje</span>
+          <textarea name="mensaje" rows="6" required minlength="10" maxlength="4000"></textarea></label>
+        <div class="trampa" aria-hidden="true"><label>No rellenar <input type="text" name="web" tabindex="-1" autocomplete="off" /></label></div>
+        <input type="hidden" name="t" value="" />
+        <input type="hidden" name="idioma" value="es" />
+        <label class="acepto"><input type="checkbox" name="acepto" value="si" required />
+          <span>Acepto que use estos datos solo para contestar a este mensaje.</span></label>
+        <div class="formulario__pie">
+          <button type="submit" class="boton boton--lleno">Enviar mensaje</button>
+          <p class="estado" role="status" aria-live="polite"></p>
         </div>
-      </article>
-      <article class="aportar-card reveal">
-        <span class="aportar-card__num" aria-hidden="true">03</span>
-        <h3 class="aportar-card__title">Automatización e IA</h3>
-        <p class="aportar-card__desc">Flujos que trabajan solos: leer facturas y tickets, clasificar gastos, preparar contenidos, mandar resúmenes. Integración de modelos de IA con revisión humana antes de guardar nada.</p>
-        <div class="tags">
-          <span class="tag">n8n</span>
-          <span class="tag">IA generativa</span>
-          <span class="tag">OCR</span>
-          <span class="tag">APIs REST</span>
-        </div>
-      </article>
-      <article class="aportar-card reveal">
-        <span class="aportar-card__num" aria-hidden="true">04</span>
-        <h3 class="aportar-card__title">Seguridad y copias</h3>
-        <p class="aportar-card__desc">Inicio de sesión único, cortafuegos, acceso remoto por VPN, copias cifradas fuera del servidor y plan de recuperación probado. Que un fallo no sea un desastre.</p>
-        <div class="tags">
-          <span class="tag">SSO</span>
-          <span class="tag">VPN</span>
-          <span class="tag">Backups cifrados</span>
-          <span class="tag">Cloudflare</span>
-        </div>
-      </article>
-      <article class="aportar-card reveal">
-        <span class="aportar-card__num" aria-hidden="true">05</span>
-        <h3 class="aportar-card__title">Integración de datos</h3>
-        <p class="aportar-card__desc">Conectar lo que hoy vive separado: el ERP, el banco, la web, las hojas de Excel. Un único sitio con los datos limpios, listo para informes y para decidir.</p>
-        <div class="tags">
-          <span class="tag">ETL</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Webhooks</span>
-          <span class="tag">Power Query</span>
-        </div>
-      </article>
-      <article class="aportar-card reveal">
-        <span class="aportar-card__num" aria-hidden="true">06</span>
-        <h3 class="aportar-card__title">Domótica y dispositivos</h3>
-        <p class="aportar-card__desc">Sensores, cámaras y climatización conectados en un panel propio, con reglas que ahorran energía y avisos al móvil. Sin depender de la nube de cada fabricante.</p>
-        <div class="tags">
-          <span class="tag">Home Assistant</span>
-          <span class="tag">MQTT</span>
-          <span class="tag">Zigbee</span>
-          <span class="tag">IoT</span>
-        </div>
-      </article>
+      </form>
+      <p class="directo">También puedes escribirme a <a href="mailto:marcos@bivg.es">marcos@bivg.es</a> o por <a href="https://es.linkedin.com/in/marcos-vallespi" target="_blank" rel="noopener">LinkedIn</a>.</p>
     </div>
-
-    <ol class="proceso">
-      <li class="proceso__paso reveal"><span class="proceso__n">1</span><strong>Escucho</strong> qué problema hay y cuánto cuesta hoy.</li>
-      <li class="proceso__paso reveal"><span class="proceso__n">2</span><strong>Propongo</strong> una solución concreta, con plazo y precio cerrados.</li>
-      <li class="proceso__paso reveal"><span class="proceso__n">3</span><strong>Entrego</strong> por partes, para que se pueda usar desde la primera semana.</li>
-      <li class="proceso__paso reveal"><span class="proceso__n">4</span><strong>Mantengo</strong> y documento, para que nada dependa solo de mí.</li>
-    </ol>
-  </div>
-</section>
-
-<!-- ── PORTFOLIO ─────────────────────────────────────────────── -->
-<section class="section" id="portfolio">
-  <div class="container">
-    <span class="section-label">Portfolio</span>
-    <h2 class="section-title">Dashboards interactivos</h2>
-    <p class="section-sub">Cuatro informes de muestra que ilustran capacidades reales de análisis, visualización y narración con datos.</p>
-
-    <div class="portfolio__grid">
-
-      <!-- Ventas -->
-      <a href="ventas.html" class="port-card reveal">
-        <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <rect width="480" height="220" fill="#18181B"/>
-            <!-- grid lines -->
-            <line x1="0" y1="55" x2="480" y2="55" stroke="#27272A" stroke-width="1"/>
-            <line x1="0" y1="110" x2="480" y2="110" stroke="#27272A" stroke-width="1"/>
-            <line x1="0" y1="165" x2="480" y2="165" stroke="#27272A" stroke-width="1"/>
-            <!-- area gradient fill -->
-            <defs>
-              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#F97316" stop-opacity="0.35"/>
-                <stop offset="100%" stop-color="#F97316" stop-opacity="0.02"/>
-              </linearGradient>
-            </defs>
-            <path d="M40,160 C80,140 120,120 160,100 C200,80 240,60 280,55 C320,50 360,70 400,65 L440,60 L440,200 L40,200 Z"
-                  fill="url(#areaGrad)"/>
-            <!-- line 2024 -->
-            <polyline points="40,160 80,140 120,120 160,100 200,80 240,60 280,55 320,50 360,70 400,65 440,60"
-                      fill="none" stroke="#F97316" stroke-width="2.5" stroke-linejoin="round"/>
-            <!-- dots -->
-            <circle cx="280" cy="55" r="4" fill="#F97316"/>
-            <circle cx="440" cy="60" r="4" fill="#F97316"/>
-            <!-- mini bars -->
-            <rect x="55" y="175" width="14" height="18" rx="2" fill="#F9731650"/>
-            <rect x="85" y="170" width="14" height="23" rx="2" fill="#F9731650"/>
-            <rect x="115" y="168" width="14" height="25" rx="2" fill="#F9731650"/>
-            <rect x="145" y="165" width="14" height="28" rx="2" fill="#F9731660"/>
-            <rect x="175" y="162" width="14" height="31" rx="2" fill="#F9731660"/>
-            <rect x="205" y="158" width="14" height="35" rx="2" fill="#F9731670"/>
-            <!-- KPI box -->
-            <rect x="300" y="20" width="130" height="40" rx="6" fill="#111113" stroke="#27272A" stroke-width="1"/>
-            <text x="318" y="38" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA" letter-spacing="1">VENTAS YTD</text>
-            <text x="318" y="53" font-family="Syne, sans-serif" font-size="14" font-weight="800" fill="#FAFAFA">2.4M €</text>
-            <text x="385" y="53" font-family="JetBrains Mono, monospace" font-size="9" fill="#10B981">+14.3%</text>
-          </svg>
-          <span class="port-card__badge">Interactivo</span>
-        </div>
-        <div class="port-card__body">
-          <div class="port-card__cat">Sales Analytics</div>
-          <h3 class="port-card__title">Sales Performance Dashboard</h3>
-          <p class="port-card__desc">Análisis completo de ventas YTD, evolución mensual vs año anterior, top productos y desglose por canal y región.</p>
-          <div class="port-card__footer">
-            <div class="port-card__kpis tags">
-              <span class="tag">2.41M€ YTD</span>
-              <span class="tag">+14.3%</span>
-              <span class="tag">38K uds</span>
-            </div>
-            <span class="port-card__link">Ver informe →</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- RRHH -->
-      <a href="rrhh.html" class="port-card reveal">
-        <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <rect width="480" height="220" fill="#18181B"/>
-            <!-- donut -->
-            <circle cx="160" cy="110" r="72" fill="none" stroke="#27272A" stroke-width="28"/>
-            <circle cx="160" cy="110" r="72" fill="none" stroke="#F97316" stroke-width="28"
-                    stroke-dasharray="220 233" stroke-dashoffset="58" stroke-linecap="round"/>
-            <circle cx="160" cy="110" r="72" fill="none" stroke="#FB923C" stroke-width="28"
-                    stroke-dasharray="116 337" stroke-dashoffset="-162" stroke-linecap="round"/>
-            <circle cx="160" cy="110" r="72" fill="none" stroke="#FDBA74" stroke-width="28"
-                    stroke-dasharray="71 382" stroke-dashoffset="-278" stroke-linecap="round"/>
-            <circle cx="160" cy="110" r="72" fill="none" stroke="#3B82F6" stroke-width="28"
-                    stroke-dasharray="46 407" stroke-dashoffset="-349" stroke-linecap="round"/>
-            <!-- center text -->
-            <text x="160" y="104" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA" letter-spacing="1">EMPLEADOS</text>
-            <text x="160" y="122" text-anchor="middle" font-family="Syne, sans-serif" font-size="22" font-weight="800" fill="#FAFAFA">247</text>
-            <!-- legend -->
-            <rect x="285" y="55" width="10" height="10" rx="2" fill="#F97316"/>
-            <text x="300" y="64" font-family="DM Sans, sans-serif" font-size="11" fill="#A1A1AA">Operaciones 49%</text>
-            <rect x="285" y="78" width="10" height="10" rx="2" fill="#FB923C"/>
-            <text x="300" y="87" font-family="DM Sans, sans-serif" font-size="11" fill="#A1A1AA">Comercial 20%</text>
-            <rect x="285" y="101" width="10" height="10" rx="2" fill="#FDBA74"/>
-            <text x="300" y="110" font-family="DM Sans, sans-serif" font-size="11" fill="#A1A1AA">IT 12%</text>
-            <rect x="285" y="124" width="10" height="10" rx="2" fill="#3B82F6"/>
-            <text x="300" y="133" font-family="DM Sans, sans-serif" font-size="11" fill="#A1A1AA">Finanzas 8%</text>
-            <rect x="285" y="147" width="10" height="10" rx="2" fill="#52525B"/>
-            <text x="300" y="156" font-family="DM Sans, sans-serif" font-size="11" fill="#A1A1AA">Otros 11%</text>
-          </svg>
-          <span class="port-card__badge">Interactivo</span>
-        </div>
-        <div class="port-card__body">
-          <div class="port-card__cat">HR Analytics</div>
-          <h3 class="port-card__title">HR Analytics Dashboard</h3>
-          <p class="port-card__desc">Visión 360 del capital humano: plantilla, rotación, absentismo, satisfacción y pirámide demográfica por departamento.</p>
-          <div class="port-card__footer">
-            <div class="port-card__kpis tags">
-              <span class="tag">247 empleados</span>
-              <span class="tag">Rotación 8.3%</span>
-              <span class="tag">NPS 7.8</span>
-            </div>
-            <span class="port-card__link">Ver informe →</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Financiero -->
-      <a href="financiero.html" class="port-card reveal">
-        <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <rect width="480" height="220" fill="#18181B"/>
-            <!-- grid -->
-            <line x1="0" y1="60" x2="480" y2="60" stroke="#27272A" stroke-width="1"/>
-            <line x1="0" y1="110" x2="480" y2="110" stroke="#27272A" stroke-width="1"/>
-            <line x1="0" y1="160" x2="480" y2="160" stroke="#27272A" stroke-width="1"/>
-            <!-- waterfall bars -->
-            <!-- Ingresos (total bar, green) -->
-            <rect x="30" y="50" width="40" height="120" rx="3" fill="#10B98150"/>
-            <rect x="30" y="50" width="40" height="120" rx="3" fill="none" stroke="#10B981" stroke-width="1.5"/>
-            <text x="50" y="43" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#A1A1AA">ING</text>
-            <!-- COGS (red, floating from top) -->
-            <rect x="88" y="90" width="40" height="70" rx="3" fill="#EF444450"/>
-            <rect x="88" y="90" width="40" height="70" rx="3" fill="none" stroke="#EF4444" stroke-width="1.5"/>
-            <text x="108" y="83" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#A1A1AA">COGS</text>
-            <!-- Margen bruto -->
-            <rect x="146" y="50" width="40" height="75" rx="3" fill="#10B98150"/>
-            <rect x="146" y="50" width="40" height="75" rx="3" fill="none" stroke="#10B981" stroke-width="1.5"/>
-            <text x="166" y="43" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#A1A1AA">MB</text>
-            <!-- OpEx (red) -->
-            <rect x="204" y="90" width="40" height="40" rx="3" fill="#EF444450"/>
-            <rect x="204" y="90" width="40" height="40" rx="3" fill="none" stroke="#EF4444" stroke-width="1.5"/>
-            <text x="224" y="83" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#A1A1AA">OPEX</text>
-            <!-- EBITDA -->
-            <rect x="262" y="50" width="40" height="55" rx="3" fill="#F9731650"/>
-            <rect x="262" y="50" width="40" height="55" rx="3" fill="none" stroke="#F97316" stroke-width="1.5"/>
-            <text x="282" y="43" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#A1A1AA">EBITDA</text>
-            <!-- D&A -->
-            <rect x="320" y="90" width="40" height="18" rx="3" fill="#EF444430"/>
-            <rect x="320" y="90" width="40" height="18" rx="3" fill="none" stroke="#EF4444" stroke-width="1.5"/>
-            <text x="340" y="83" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#A1A1AA">D&amp;A</text>
-            <!-- EBIT -->
-            <rect x="378" y="50" width="40" height="45" rx="3" fill="#F9731660"/>
-            <rect x="378" y="50" width="40" height="45" rx="3" fill="none" stroke="#F97316" stroke-width="2"/>
-            <text x="398" y="43" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#F97316">EBIT</text>
-            <!-- label -->
-            <rect x="310" y="165" width="140" height="32" rx="5" fill="#111113" stroke="#27272A" stroke-width="1"/>
-            <text x="325" y="180" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA">EBIT MARGIN</text>
-            <text x="325" y="193" font-family="Syne, sans-serif" font-size="12" font-weight="800" fill="#F97316">18.4%</text>
-          </svg>
-          <span class="port-card__badge">Interactivo</span>
-        </div>
-        <div class="port-card__body">
-          <div class="port-card__cat">Financial Analytics</div>
-          <h3 class="port-card__title">Financial Performance Dashboard</h3>
-          <p class="port-card__desc">Cuenta de resultados ejecutiva, waterfall P&amp;L, comparativa budget vs real y análisis de cashflow mensual.</p>
-          <div class="port-card__footer">
-            <div class="port-card__kpis tags">
-              <span class="tag">8.74M€ ing.</span>
-              <span class="tag">EBITDA 18.5%</span>
-              <span class="tag">FCF +24%</span>
-            </div>
-            <span class="port-card__link">Ver informe →</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Operaciones -->
-      <a href="operaciones.html" class="port-card reveal">
-        <div class="port-card__preview">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <rect width="480" height="220" fill="#18181B"/>
-            <!-- gauge background arc -->
-            <defs>
-              <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#FB923C"/>
-                <stop offset="100%" stop-color="#F97316"/>
-              </linearGradient>
-            </defs>
-            <path d="M 55 160 A 90 90 0 0 1 245 160" fill="none" stroke="#27272A" stroke-width="20" stroke-linecap="round"/>
-            <!-- 87.3% of 180deg = 157deg -->
-            <path d="M 55 160 A 90 90 0 0 1 245 160" fill="none" stroke="url(#gaugeGrad)" stroke-width="20"
-                  stroke-linecap="round" stroke-dasharray="245 282" />
-            <text x="150" y="148" text-anchor="middle" font-family="Syne, sans-serif" font-size="28" font-weight="800" fill="#FAFAFA">87.3%</text>
-            <text x="150" y="168" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A1A1AA" letter-spacing="2">OEE GLOBAL</text>
-            <!-- sub metrics right -->
-            <line x1="275" y1="60" x2="275" y2="185" stroke="#27272A" stroke-width="1"/>
-            <text x="295" y="95" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA">DISPONIBILIDAD</text>
-            <text x="295" y="110" font-family="Syne, sans-serif" font-size="18" font-weight="800" fill="#3B82F6">91.2%</text>
-            <text x="295" y="135" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA">RENDIMIENTO</text>
-            <text x="295" y="150" font-family="Syne, sans-serif" font-size="18" font-weight="800" fill="#F97316">93.8%</text>
-            <text x="295" y="172" font-family="JetBrains Mono, monospace" font-size="9" fill="#A1A1AA">CALIDAD</text>
-            <text x="295" y="187" font-family="Syne, sans-serif" font-size="18" font-weight="800" fill="#10B981">98.2%</text>
-          </svg>
-          <span class="port-card__badge">Interactivo</span>
-        </div>
-        <div class="port-card__body">
-          <div class="port-card__cat">Operations Analytics</div>
-          <h3 class="port-card__title">Operations Control Tower</h3>
-          <p class="port-card__desc">Torre de control operativo: OEE, producción diaria vs objetivo, estado de líneas, lead time y análisis de defectos Pareto.</p>
-          <div class="port-card__footer">
-            <div class="port-card__kpis tags">
-              <span class="tag">OEE 87.3%</span>
-              <span class="tag">OTD 96.1%</span>
-              <span class="tag">Defectos 1.8%</span>
-            </div>
-            <span class="port-card__link">Ver informe →</span>
-          </div>
-        </div>
-      </a>
-
-    </div><!-- /portfolio__grid -->
-  </div>
-</section>
-
-<!-- ── STACK ─────────────────────────────────────────────────── -->
-<section class="section section--secondary" id="stack">
-  <div class="container">
-    <span class="section-label">Stack tecnológico</span>
-    <h2 class="section-title">Herramientas &amp; tecnologías</h2>
-    <p class="section-sub">Dominio end-to-end del ecosistema Microsoft BI, complementado con desarrollo web, infraestructura, automatización y control de versiones.</p>
-
-    <div class="stack__grid">
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">📊</span>
-        <span class="stack-item__name">Power BI</span>
-        <span class="stack-item__level">Experto</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🧮</span>
-        <span class="stack-item__name">DAX</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">⚡</span>
-        <span class="stack-item__name">Power Query</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🗄️</span>
-        <span class="stack-item__name">SQL Server</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">💾</span>
-        <span class="stack-item__name">T-SQL</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🔷</span>
-        <span class="stack-item__name">PowerShell</span>
-        <span class="stack-item__level">Intermedio</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🐍</span>
-        <span class="stack-item__name">Python</span>
-        <span class="stack-item__level">Intermedio</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🖥️</span>
-        <span class="stack-item__name">Windows Server</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🌿</span>
-        <span class="stack-item__name">Git / Fabric</span>
-        <span class="stack-item__level">Intermedio</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🔲</span>
-        <span class="stack-item__name">Proxmox</span>
-        <span class="stack-item__level">Intermedio</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">⚛️</span>
-        <span class="stack-item__name">React / Vite</span>
-        <span class="stack-item__level">Intermedio</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">☁️</span>
-        <span class="stack-item__name">Power BI Service</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">▲</span>
-        <span class="stack-item__name">Next.js / TypeScript</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🐳</span>
-        <span class="stack-item__name">Docker</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🐧</span>
-        <span class="stack-item__name">Linux / VPS</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🐘</span>
-        <span class="stack-item__name">PostgreSQL</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🔀</span>
-        <span class="stack-item__name">n8n</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🤖</span>
-        <span class="stack-item__name">IA generativa</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🏠</span>
-        <span class="stack-item__name">Home Assistant</span>
-        <span class="stack-item__level">Avanzado</span>
-      </div>
-      <div class="stack-item reveal">
-        <span class="stack-item__icon" aria-hidden="true">🛡️</span>
-        <span class="stack-item__name">Traefik / Cloudflare</span>
-        <span class="stack-item__level">Intermedio</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CONTACTO ──────────────────────────────────────────────── -->
-<section class="section contact" id="contacto">
-  <div class="container">
-    <span class="section-label" style="justify-content:center;">Contacto</span>
-    <h2 class="section-title">¿Hablamos?</h2>
-    <p class="section-sub" style="margin: 0 auto 0;">Cuéntame qué necesitas: un informe, una aplicación, un servidor que no dé guerra o un proceso que quieras automatizar. Te contesto en uno o dos días.</p>
-
-    <!-- Lo recibe gastos.bivg.es/api/contacto-web y llega a Marcos por
-         Telegram. Funciona también sin JavaScript (vuelve aquí con ?contacto=ok). -->
-    <form class="form-contacto reveal" id="form-contacto" action="https://gastos.bivg.es/api/contacto-web" method="post" novalidate>
-      <div class="form-contacto__fila">
-        <label class="campo">
-          <span class="campo__etiqueta">Nombre</span>
-          <input type="text" name="nombre" autocomplete="name" required maxlength="100" />
-        </label>
-        <label class="campo">
-          <span class="campo__etiqueta">Email</span>
-          <input type="email" name="email" autocomplete="email" required maxlength="200" />
-        </label>
-      </div>
-      <label class="campo">
-        <span class="campo__etiqueta">Sobre qué <span class="campo__opcional">(opcional)</span></span>
-        <select name="tema">
-          <option value="">Elige uno</option>
-          <option>Informes y Power BI</option>
-          <option>Una aplicación a medida</option>
-          <option>Servidores y sistemas</option>
-          <option>Automatización e IA</option>
-          <option>Otra cosa</option>
-        </select>
-      </label>
-      <label class="campo">
-        <span class="campo__etiqueta">Mensaje</span>
-        <textarea name="mensaje" rows="5" required minlength="10" maxlength="4000"></textarea>
-      </label>
-      <!-- Trampa para bots: una persona no ve ni rellena este campo. -->
-      <div class="campo-trampa" aria-hidden="true">
-        <label>No rellenar <input type="text" name="web" tabindex="-1" autocomplete="off" /></label>
-      </div>
-      <input type="hidden" name="t" value="" />
-      <label class="form-contacto__acepto">
-        <input type="checkbox" name="acepto" value="si" required />
-        <span>Acepto que use estos datos solo para contestar a este mensaje.</span>
-      </label>
-      <div class="form-contacto__pie">
-        <button type="submit" class="btn-primary">Enviar mensaje</button>
-        <p class="form-contacto__estado" role="status" aria-live="polite"></p>
-      </div>
-    </form>
-
-    <p class="contact__o">O si lo prefieres, directamente:</p>
-    <div class="contact__grid">
-      <a href="mailto:marcos@bivg.es" class="contact-card reveal">
-        <span class="contact-card__icon" aria-hidden="true">✉️</span>
-        <div>
-          <span class="contact-card__label">Email</span>
-          <span class="contact-card__value">marcos@bivg.es</span>
-        </div>
-      </a>
-      <a href="https://es.linkedin.com/in/marcos-vallespi" target="_blank" rel="noopener" class="contact-card reveal" aria-label="LinkedIn: Marcos Vallespí (se abre en una pestaña nueva)">
-        <span class="contact-card__icon" aria-hidden="true">💼</span>
-        <div>
-          <span class="contact-card__label">LinkedIn</span>
-          <span class="contact-card__value">Marcos Vallespí</span>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 
 </main>
 
-<!-- ── FOOTER ────────────────────────────────────────────────── -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer__inner">
-      <div class="footer__logo">BI<span>VG</span></div>
-      <div class="footer__copy">&copy; <span id="year">2026</span> Marcos &mdash; BIVG. Todos los derechos reservados.</div>
-      <div class="footer__tagline">bivg.es &middot; Business Intelligence &amp; Data Analytics</div>
-    </div>
-  </div>
+<footer class="envoltura pie">
+  <span>© <span id="anio">2026</span> Marcos Vallespí</span>
+  <a href="en/" hreflang="en" lang="en">Read in English</a>
 </footer>
 
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/inicio.js" defer></script>
 </body>
 </html>
