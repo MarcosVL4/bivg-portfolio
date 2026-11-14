@@ -673,6 +673,167 @@ a.cert-badge:hover {
   color: var(--text-primary);
 }
 
+/* ── QUÉ PUEDO APORTAR ───────────────────────────────────────── */
+.aportar__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+.aportar-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.aportar-card:hover {
+  border-color: var(--orange);
+  box-shadow: 0 0 20px #F9731610;
+  transform: translateY(-4px);
+}
+.aportar-card__num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.aportar-card__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+.aportar-card__desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.proceso {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 40px;
+  padding: 0;
+}
+.proceso__paso {
+  border-top: 2px solid var(--border-subtle);
+  padding-top: 14px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.proceso__paso strong { color: var(--text-primary); font-weight: 500; }
+.proceso__n {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--orange);
+  margin-bottom: 4px;
+}
+
+/* ── FORMULARIO DE CONTACTO ──────────────────────────────────── */
+.form-contacto {
+  max-width: 640px;
+  margin: 48px auto 0;
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.form-contacto__fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo__etiqueta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.campo__opcional { text-transform: none; letter-spacing: 0; }
+.campo input,
+.campo select,
+.campo textarea {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 11px 12px;
+  width: 100%;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.campo textarea { resize: vertical; min-height: 120px; }
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-glow2);
+}
+.campo [aria-invalid="true"] { border-color: var(--red); }
+.campo-trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form-contacto__acepto {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.form-contacto__acepto input { margin-top: 3px; accent-color: var(--orange); width: 16px; height: 16px; flex: none; }
+.form-contacto__pie {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.form-contacto__pie .btn-primary { border: none; cursor: pointer; font: inherit; }
+.form-contacto__pie .btn-primary[disabled] { opacity: .6; cursor: progress; }
+.form-contacto__estado { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+.form-contacto__estado.ok { color: var(--green); }
+.form-contacto__estado.error { color: var(--red); }
+.contact__o {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.contact__o + .contact__grid { margin-top: 20px; }
+
+@media (max-width: 1024px) {
+  .aportar__grid { grid-template-columns: repeat(2, 1fr); }
+  .proceso { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .aportar__grid,
+  .proceso,
+  .form-contacto__fila { grid-template-columns: 1fr; }
+  .form-contacto { padding: 20px; }
+}
+
 /* ── FOOTER ──────────────────────────────────────────────────── */
 .footer {
   background: var(--bg-card);
