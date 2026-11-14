@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marcos Vallespí, Business Intelligence consultant</title>
-  <meta name="description" content="Microsoft-certified Power BI Data Analyst (PL-300) with more than seven years in Business Intelligence. I also automate processes and build custom applications." />
+  <meta name="description" content="Systems engineer and Microsoft-certified Power BI Data Analyst (PL-300) with more than seven years in Business Intelligence. Systems administration, process automation and custom applications." />
   <link rel="canonical" href="https://bivg.es/en/" />
   <link rel="alternate" hreflang="es" href="https://bivg.es/" />
   <link rel="alternate" hreflang="en" href="https://bivg.es/en/" />
@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/inicio.css" />
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Marcos Vallespí","url":"https://bivg.es/en/","jobTitle":"Business Intelligence consultant","sameAs":["https://es.linkedin.com/in/marcos-vallespi"],"hasCredential":{"@type":"EducationalOccupationalCredential","name":"Microsoft Certified: Power BI Data Analyst Associate (PL-300)"}}
+  {"@context":"https://schema.org","@type":"Person","name":"Marcos Vallespí","url":"https://bivg.es/en/","jobTitle":"Business Intelligence consultant","sameAs":["https://es.linkedin.com/in/marcos-vallespi"],"hasCredential":[{"@type":"EducationalOccupationalCredential","credentialCategory":"degree","name":"Ingeniería Técnica en Informática de Sistemas (Technical Engineering in Computer Systems)"},{"@type":"EducationalOccupationalCredential","credentialCategory":"certification","name":"Microsoft Certified: Power BI Data Analyst Associate (PL-300)"}]}
   </script>
 </head>
 <body>
@@ -48,12 +48,12 @@
 
   <section class="envoltura portada" aria-labelledby="titular">
     <div>
-      <p class="portada__quien">Marcos Vallespí, Business Intelligence consultant in Spain</p>
+      <p class="portada__quien">Marcos Vallespí, systems engineer and Business Intelligence consultant in Spain</p>
       <h1 id="titular">From scattered data to reports people actually use.</h1>
       <p class="portada__texto">
         I have spent <strong>more than seven years</strong> modelling data and publishing Power BI reports.
-        When a project needs it, I also build what surrounds the report: the app that collects the data,
-        the automation that cleans it and the server where it all runs.
+        As a systems engineer, I also take care of what lies underneath: the servers everything runs on,
+        the automation that cleans the data and the app that collects it.
       </p>
       <a class="credencial" href="https://learn.microsoft.com/api/credentials/share/en-gb/Marcos-6363/B257FB48FBDECB53?sharingId=D86A6103BB93D4D9" target="_blank" rel="noopener">
         <span class="credencial__sello" aria-hidden="true">PL-300</span>
@@ -74,7 +74,7 @@
       </svg>
       <div class="tabla tabla--hechos" aria-hidden="true">
         <div class="tabla__nombre">Project <small>fact</small></div>
-        <ul><li>data</li><li>report</li><li>process</li><li>app</li></ul>
+        <ul><li>report</li><li>system</li><li>process</li><li>app</li></ul>
       </div>
       <a class="tabla" data-dim="arr" href="#reports">
         <span class="tabla__nombre">Reporting <small>1</small></span>
@@ -88,9 +88,9 @@
         <span class="tabla__nombre">Apps <small>1</small></span>
         <ul><li>Next.js</li><li>Rust</li><li>PostgreSQL</li></ul>
       </a>
-      <a class="tabla" data-dim="izq" href="#production">
-        <span class="tabla__nombre">Production <small>1</small></span>
-        <ul><li>Linux</li><li>Docker</li><li>Backups</li></ul>
+      <a class="tabla" data-dim="izq" href="#systems">
+        <span class="tabla__nombre">Systems <small>1</small></span>
+        <ul><li>Linux</li><li>Windows Server</li><li>Docker</li></ul>
       </a>
     </figure>
   </section>
@@ -98,12 +98,17 @@
   <section class="envoltura seccion" id="what-i-do" aria-labelledby="t-what">
     <h2 id="t-what">What I do</h2>
     <div>
-      <p class="seccion__intro">The report is the centre. Everything else exists so the data reaches it clean, on time and without anyone copying it by hand.</p>
+      <p class="seccion__intro">I trained in systems and I work with data. That is why I can handle the report and everything that holds it up: data that arrives clean, on time and on a server that does not fail.</p>
       <dl class="areas">
         <div class="area" id="reports">
           <dt>Reports and data models</dt>
           <dd>Star schemas, DAX measures and loads from SQL Server, so the numbers add up and the report opens fast. Row-level security when each person should only see their own data.
             <p class="herramientas">Power BI, DAX, Power Query, SQL Server, T-SQL, SSIS.</p></dd>
+        </div>
+        <div class="area" id="systems">
+          <dt>Systems administration</dt>
+          <dd>Linux and Windows Server machines, virtualisation and containers. Set-up and maintenance, domains and certificates, remote access over VPN, single sign-on, firewalls, encrypted off-site backups with a recovery plan, and monitoring with alerts when something goes down.
+            <p class="herramientas">Linux, Windows Server, PowerShell, Proxmox, Docker, Traefik, Cloudflare, Tailscale.</p></dd>
         </div>
         <div class="area" id="automation">
           <dt>Process automation</dt>
@@ -114,11 +119,6 @@
           <dt>Custom applications</dt>
           <dd>Internal tools that replace the shared spreadsheet: with users and permissions, usable from a phone, and storing data ready for analysis.
             <p class="herramientas">Next.js, TypeScript, React, Rust with Axum, PostgreSQL, SQLite.</p></dd>
-        </div>
-        <div class="area" id="production">
-          <dt>Running it in production</dt>
-          <dd>Hosting all of the above and keeping it running: containers, domains and certificates, single sign-on, encrypted off-site backups and alerts when something goes down.
-            <p class="herramientas">Linux, Windows Server, Docker, Traefik, Cloudflare, Proxmox.</p></dd>
         </div>
       </dl>
     </div>
